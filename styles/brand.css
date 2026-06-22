@@ -1,0 +1,84 @@
+/* ===========================================================================
+   THE LINDSAY LODGE — Brand tokens (from official Brand Guidelines v1.0)
+   Deep Blue / Spa Hue heroes · Gold Dust / Burnt Fall / Ever Green / Pale Rosé
+   Headlines: Roxborough CF  → Cormorant Garamond (substitute, FLAGGED)
+   Body:      Evolve Sans Lt → Mulish            (substitute, FLAGGED)
+   Script:    BD Script      → Pinyon Script      (substitute, FLAGGED)
+   =========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Mulish:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Pinyon+Script&display=swap');
+
+:root{
+  /* Brand palette — exact hex from guidelines */
+  --ink:        #163544;   /* Deep Blue  — hero, primary text */
+  --ink-90:     #294655;
+  --ink-70:     #4a6571;
+  --spa:        #82A2A2;   /* Spa Hue    — hero secondary */
+  --spa-dk:     #5e7d7d;
+  --spa-lt:     #aec4c4;
+  --gold:       #C6BD8C;   /* Gold Dust */
+  --gold-dk:    #a99f6a;
+  --burnt:      #A65910;   /* Burnt Fall — primary CTA / accent */
+  --burnt-dk:   #8a4a0d;
+  --evergreen:  #888957;   /* Ever Green */
+  --rose:       #DDCEC0;   /* Pale Rosé  — warm neutral */
+
+  /* Derived warm neutrals (backgrounds) */
+  --canvas:     #FBF8F2;   /* warm off-white page bg */
+  --canvas-2:   #F3ECE0;   /* secondary section bg */
+  --paper:      #FFFFFF;
+  --line:       #E4DBCC;   /* hairline dividers */
+
+  --fg:         var(--ink);
+  --fg-soft:    #45565f;
+  --fg-mute:    #6f7d83;
+  --on-dark:    #F4EEE3;
+  --on-dark-mute:#c3cdc9;
+
+  /* Type */
+  --display: 'Cormorant Garamond', 'Roxborough CF', Georgia, serif;
+  --body:    'Mulish', 'Evolve Sans', system-ui, sans-serif;
+  --script:  'Pinyon Script', cursive;
+
+  --tracking-eyebrow: 0.34em;
+  --tracking-display: -0.01em;
+
+  /* Spacing / radius / shadow */
+  --r-sm: 4px; --r-md: 10px; --r-lg: 18px; --r-pill: 999px;
+  --shadow-sm: 0 2px 10px rgba(22,53,68,.08);
+  --shadow-md: 0 12px 34px rgba(22,53,68,.14);
+  --shadow-lg: 0 30px 70px rgba(22,53,68,.22);
+  --ease: cubic-bezier(.22,1,.36,1);
+}
+
+*{ box-sizing: border-box; }
+html{ -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+body{ margin:0; font-family: var(--body); color: var(--fg); background: var(--canvas);
+      font-weight:400; line-height:1.65; font-size:17px; }
+
+h1,h2,h3,h4{ font-family: var(--display); font-weight:600; line-height:1.02;
+  letter-spacing: var(--tracking-display); margin:0; color: var(--ink); }
+
+.eyebrow{ font-family: var(--body); font-weight:600; font-size:.72rem;
+  letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; }
+
+.script{ font-family: var(--script); font-weight:400; letter-spacing:0; line-height:1; }
+
+a{ color: inherit; text-decoration: none; }
+
+/* Shared building blocks ------------------------------------------------ */
+.btn{ display:inline-flex; align-items:center; gap:.6em; font-family:var(--body);
+  font-weight:600; font-size:.8rem; letter-spacing:.16em; text-transform:uppercase;
+  padding:1.05em 1.9em; border-radius:var(--r-pill); cursor:pointer; border:1px solid transparent;
+  transition: all .28s var(--ease); }
+.btn--solid{ background:var(--burnt); color:#fff; }
+.btn--solid:hover{ background:var(--burnt-dk); transform:translateY(-1px); }
+.btn--ink{ background:var(--ink); color:var(--on-dark); }
+.btn--ink:hover{ background:#0e2630; transform:translateY(-1px); }
+.btn--ghost{ border-color:currentColor; color:var(--ink); }
+.btn--ghost:hover{ background:var(--ink); color:var(--on-dark); border-color:var(--ink); }
+.btn--ghost-light{ border-color:rgba(255,255,255,.6); color:#fff; }
+.btn--ghost-light:hover{ background:#fff; color:var(--ink); }
+.btn--sms{ border-color:var(--gold-dk); color:var(--gold); }
+.btn--sms:hover{ background:var(--gold); color:var(--ink); border-color:var(--gold); }
+
+.rule{ width:54px; height:2px; background:var(--burnt); border:0; }

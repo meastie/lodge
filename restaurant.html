@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Restaurant | The Lindsay Lodge</title>
+<link rel="stylesheet" href="styles/brand.css">
+<style>
+/* ============ RESTAURANT — Direction A "Riverfront" language ============ */
+.wrap{ max-width:1240px; margin:0 auto; padding:0 40px; }
+.wrap--narrow{ max-width:1000px; }
+
+/* NAV (shared with Direction A) */
+.nav{ position:fixed; inset:0 0 auto 0; z-index:50; display:flex; align-items:center;
+  justify-content:space-between; padding:22px 44px; transition:all .4s var(--ease); }
+.nav__links{ display:flex; gap:34px; align-items:center; }
+.nav a.navlink{ font-family:var(--body); font-weight:600; font-size:.74rem; letter-spacing:.18em;
+  text-transform:uppercase; color:#fff; opacity:.92; transition:opacity .2s; position:relative; }
+.nav a.navlink:hover{ opacity:1; }
+.nav a.navlink.active{ opacity:1; }
+.nav a.navlink.active::after{ content:""; position:absolute; left:0; right:0; bottom:-7px; height:2px; background:var(--gold); }
+.nav__logo img{ height:42px; display:block; transition:filter .4s var(--ease); }
+.nav .btn{ padding:.85em 1.5em; }
+.nav--scrolled{ background:var(--canvas); padding:14px 44px; box-shadow:var(--shadow-sm); }
+.nav--scrolled a.navlink{ color:var(--ink); }
+.nav--scrolled a.navlink.active::after{ background:var(--burnt); }
+.nav--scrolled .nav__logo img{ filter:brightness(0) saturate(100%) invert(15%) sepia(34%) saturate(900%) hue-rotate(155deg) brightness(94%) contrast(92%); }
+.nav--scrolled .btn--ghost-light{ border-color:var(--ink); color:var(--ink); }
+.nav--scrolled .btn--ghost-light:hover{ background:var(--ink); color:#fff; }
+.nav__left{ display:flex; align-items:center; gap:42px; }
+
+/* HERO — shorter sub-page hero */
+.hero{ position:relative; height:74vh; min-height:560px; display:flex; align-items:flex-end;
+  color:#fff; overflow:hidden; }
+.hero img.bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.hero::after{ content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(11,28,36,.5) 0%, rgba(11,28,36,.12) 40%, rgba(11,28,36,.74) 100%); }
+.hero__in{ position:relative; z-index:2; padding:0 0 70px; }
+.hero .eyebrow{ color:var(--gold); margin-bottom:18px; display:block; }
+.hero h1{ color:#fff; font-size:clamp(3rem,7vw,6rem); font-weight:500; line-height:.96; text-shadow:0 2px 40px rgba(0,0,0,.35); }
+.hero h1 em{ font-style:italic; color:var(--gold); }
+.hero__sub{ margin:22px 0 0; max-width:52ch; font-size:1.1rem; font-weight:300; color:rgba(255,255,255,.92); }
+
+/* shared section */
+.pad{ padding:112px 0; }
+.eyebrow--burnt{ color:var(--burnt); }
+.lead{ font-family:var(--display); font-size:clamp(2rem,3.4vw,3rem); font-weight:500; line-height:1.12; color:var(--ink); }
+
+/* ABOUT split */
+.about{ display:grid; grid-template-columns:1.05fr 1fr; gap:80px; align-items:center; }
+.about__copy .eyebrow{ display:block; margin-bottom:18px; }
+.about__copy .script{ font-size:2.5rem; color:var(--spa-dk); display:block; margin-bottom:4px; }
+.about__copy p{ color:var(--fg-soft); margin:22px 0 0; max-width:34em; }
+.about__media{ position:relative; }
+.about__media img{ width:100%; height:540px; object-fit:cover; border-radius:var(--r-md); box-shadow:var(--shadow-md); display:block; }
+.about__media .tag{ position:absolute; right:24px; bottom:24px; background:var(--ink); color:#fff;
+  padding:16px 22px; border-radius:var(--r-md); box-shadow:var(--shadow-md); text-align:center; }
+.about__media .tag b{ font-family:var(--display); font-size:1.5rem; display:block; line-height:1; }
+.about__media .tag small{ font-size:.62rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); }
+
+/* MENU */
+.menu{ background:var(--canvas-2); }
+.menu__head{ text-align:center; max-width:680px; margin:0 auto 18px; }
+.menu__head h2{ font-size:clamp(2.4rem,4vw,3.4rem); font-weight:500; margin-top:12px; }
+.menu__note{ text-align:center; color:var(--fg-mute); font-style:italic; font-size:.95rem; margin:0 auto 56px; max-width:54ch; }
+.menu__cols{ display:grid; grid-template-columns:1fr 1fr; gap:40px 64px; }
+.mcard{ background:var(--paper); border:1px solid var(--line); border-radius:var(--r-md); padding:42px 44px; box-shadow:var(--shadow-sm); }
+.mcard--span{ grid-column:1 / -1; }
+.mcat{ font-family:var(--body); font-weight:600; font-size:.74rem; letter-spacing:.24em; text-transform:uppercase;
+  color:var(--burnt); display:flex; align-items:center; gap:14px; margin-bottom:28px; }
+.mcat::after{ content:""; flex:1; height:1px; background:var(--line); }
+.dish{ margin-bottom:24px; }
+.dish:last-child{ margin-bottom:0; }
+.dish__top{ display:flex; align-items:baseline; gap:10px; }
+.dish__name{ font-family:var(--display); font-size:1.42rem; font-weight:600; color:var(--ink); white-space:nowrap; }
+.dish__dots{ flex:1; border-bottom:1.5px dotted var(--gold-dk); transform:translateY(-4px); min-width:18px; opacity:.7; }
+.dish__price{ font-family:var(--display); font-size:1.25rem; color:var(--ink); font-weight:600; }
+.dish__desc{ color:var(--fg-soft); font-size:.95rem; margin:5px 0 0; max-width:46ch; }
+.dish__tag{ font-size:.62rem; letter-spacing:.16em; text-transform:uppercase; color:var(--evergreen); font-weight:600; margin-left:8px; }
+.mcard--span .dish-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px 56px; }
+
+/* WINE ribbon */
+.wine{ position:relative; padding:150px 0; text-align:center; color:#fff; overflow:hidden; }
+.wine img.bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.wine::after{ content:""; position:absolute; inset:0; background:rgba(16,38,48,.62); }
+.wine__in{ position:relative; z-index:2; max-width:820px; margin:0 auto; padding:0 30px; }
+.wine .script{ font-size:clamp(2.4rem,4.6vw,3.6rem); color:var(--gold); display:block; margin-bottom:10px; }
+.wine h2{ color:#fff; font-size:clamp(2rem,3.4vw,3rem); font-weight:500; }
+.wine p{ color:rgba(255,255,255,.9); font-weight:300; margin:20px auto 0; max-width:52ch; }
+.wine__stats{ display:flex; justify-content:center; gap:60px; margin-top:42px; flex-wrap:wrap; }
+.wine__stats .s b{ font-family:var(--display); font-size:2.8rem; display:block; line-height:1; color:var(--gold); }
+.wine__stats .s small{ font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.8); margin-top:8px; display:block; }
+
+/* REVIEWS */
+.rev__head{ text-align:center; margin-bottom:56px; }
+.rev__head .eyebrow{ color:var(--burnt); }
+.rev__head h2{ font-size:clamp(2.2rem,3.6vw,3.2rem); font-weight:500; margin-top:10px; }
+.rev__grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+.rcard{ background:var(--paper); border:1px solid var(--line); border-radius:var(--r-md); padding:34px 32px; display:flex; flex-direction:column; }
+.rcard .stars{ color:var(--gold-dk); letter-spacing:.18em; font-size:.92rem; }
+.rcard p{ font-family:var(--display); font-style:italic; font-size:1.3rem; line-height:1.4; color:var(--ink); margin:16px 0 22px; }
+.rcard .who{ margin-top:auto; font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--fg-mute); }
+.rev__src{ text-align:center; margin-top:34px; font-size:.82rem; color:var(--fg-mute); }
+
+/* HOURS / RESERVE */
+.reserve{ background:var(--ink); color:var(--on-dark); }
+.reserve__grid{ display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+.reserve .script{ color:var(--gold); font-size:2.2rem; display:block; margin-bottom:6px; }
+.reserve h2{ color:#fff; font-size:clamp(2.2rem,3.8vw,3.4rem); font-weight:500; }
+.reserve p{ color:var(--on-dark-mute); margin:20px 0 30px; max-width:34em; }
+.hours{ display:flex; flex-direction:column; gap:0; }
+.hours .row{ display:flex; justify-content:space-between; align-items:baseline; padding:15px 0; border-top:1px solid rgba(255,255,255,.14); }
+.hours .row:last-child{ border-bottom:1px solid rgba(255,255,255,.14); }
+.hours .d{ font-size:.74rem; letter-spacing:.16em; text-transform:uppercase; color:var(--spa-lt); }
+.hours .t{ font-family:var(--display); font-size:1.2rem; color:#fff; }
+.hours .t.closed{ color:var(--on-dark-mute); font-style:italic; font-size:1rem; }
+
+/* FOOTER (shared) */
+footer{ background:#0f2630; color:var(--on-dark-mute); padding:70px 0 40px; }
+.foot{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:48px; }
+.foot__brand img{ height:44px; margin-bottom:18px; }
+.foot__brand p{ font-size:.92rem; max-width:26em; }
+.foot h4{ color:#fff; font-family:var(--body); font-size:.72rem; letter-spacing:.22em; text-transform:uppercase; margin:0 0 18px; }
+.foot ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px; }
+.foot a:hover{ color:var(--gold); }
+.foot__bottom{ margin-top:54px; padding-top:24px; border-top:1px solid rgba(255,255,255,.12);
+  display:flex; justify-content:space-between; font-size:.78rem; color:rgba(255,255,255,.5); flex-wrap:wrap; gap:12px; }
+
+@media(max-width:980px){
+  .about,.reserve__grid{ grid-template-columns:1fr; gap:44px; }
+  .menu__cols{ grid-template-columns:1fr; }
+  .mcard--span .dish-grid{ grid-template-columns:1fr; }
+  .rev__grid{ grid-template-columns:1fr; }
+  .nav__links{ display:none; }
+  .nav__left{ gap:0; }
+  .foot{ grid-template-columns:1fr 1fr; }
+}
+@media(max-width:560px){ .wrap{ padding:0 22px; } .foot{ grid-template-columns:1fr; } .dish__desc{ max-width:none; } }
+
+/* Mobile burger & drawer */
+.nav__burger{ display:none; background:none; border:none; cursor:pointer; padding:6px; flex-direction:column; gap:5px; align-items:center; justify-content:center; }
+.nav__burger span{ display:block; width:22px; height:2px; background:#fff; border-radius:2px; transition:transform .3s var(--ease), opacity .2s, background .4s var(--ease); }
+.nav--scrolled .nav__burger span{ background:var(--ink); }
+.nav__burger[aria-expanded="true"] span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+.nav__burger[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+.nav__burger[aria-expanded="true"] span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+.nav__mobile{ position:fixed; inset:0 0 auto 0; z-index:49; background:var(--canvas); padding:86px 44px 36px; display:flex; flex-direction:column; opacity:0; pointer-events:none; transform:translateY(-12px); transition:opacity .32s var(--ease), transform .32s var(--ease); box-shadow:var(--shadow-md); }
+.nav__mobile.open{ opacity:1; transform:none; pointer-events:auto; }
+.nav__mobile a{ font-family:var(--body); font-weight:600; font-size:.8rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ink); padding:16px 0; border-bottom:1px solid var(--line); display:block; }
+.nav__mobile > a:last-of-type{ border-bottom:none; }
+.nav__mobile__close{ position:absolute; top:20px; right:22px; background:none; border:1px solid var(--line); border-radius:var(--r-pill); width:36px; height:36px; display:grid; place-items:center; cursor:pointer; color:var(--ink); font-size:.95rem; transition:background .2s, color .2s; }
+.nav__mobile__close:hover{ background:var(--ink); color:#fff; border-color:var(--ink); }
+.nav--scrolled .btn--sms{ color:var(--gold-dk); border-color:var(--gold-dk); }
+.nav--scrolled .btn--sms:hover{ background:var(--gold-dk); color:#fff; }
+.nav__mobile__sms{ margin-top:18px; padding-top:22px; border-top:1px solid var(--line); }
+.nav__mobile .nav__mobile__sms a{ border-bottom:none; padding:0; color:var(--gold-dk); font-size:.76rem; letter-spacing:.14em; }
+.nav__mobile .nav__mobile__sms a:hover{ color:var(--burnt); }
+@media(max-width:980px){ .nav__burger{ display:flex; } .nav__sms-desktop{ display:none; } }
+</style>
+</head>
+<body data-screen-label="Restaurant">
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav__left">
+    <button class="nav__burger" id="navBurger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <a class="nav__logo" href="index.html"><img src="https://static.wixstatic.com/media/81984b_c04ca0d64a994e589d77ba62fd34f789~mv2.png/v1/fill/w_420,h_168,al_c,q_90,enc_auto/file.png" alt="The Lindsay Lodge"></a>
+    <div class="nav__links">
+      <a class="navlink" href="index.html#lodge">The Lodge</a>
+      <a class="navlink active" href="restaurant.html">Restaurant</a>
+      <a class="navlink" href="weddings.html">Weddings</a>
+      <a class="navlink" href="index.html#gallery">Gallery</a>
+      <a class="navlink" href="index.html#visit">Contact</a>
+    </div>
+  </div>
+  <div style="display:flex;gap:10px;align-items:center;">
+    <a class="btn btn--ghost-light nav__sms-desktop" href="https://mailchi.mp/thelindsaylodge/sms-signup" target="_blank" rel="noopener">SMS Updates</a>
+    <a class="btn btn--ghost-light" href="https://resnexus.com/resnexus/reservations/book/3CEECE79-8033-436E-B583-3819718437B6" target="_blank" rel="noopener">Book Now</a>
+  </div>
+</nav>
+<div class="nav__mobile" id="navMobile">
+  <button class="nav__mobile__close" id="navMobileClose" aria-label="Close menu">✕</button>
+  <a href="index.html#lodge">The Lodge</a>
+  <a href="restaurant.html">Restaurant</a>
+  <a href="weddings.html">Weddings</a>
+  <a href="index.html#gallery">Gallery</a>
+  <a href="index.html#visit">Contact</a>
+  <div class="nav__mobile__sms">
+    <a href="https://mailchi.mp/thelindsaylodge/sms-signup" target="_blank" rel="noopener">Sign up for text updates</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <img class="bg" src="assets/restaurant-hero.jpg" alt="The fireside dining room at The Lindsay, with the stone hearth aglow">
+  <div class="wrap hero__in">
+    <span class="eyebrow">The Restaurant &amp; Bar</span>
+    <h1>Locally inspired,<br><em>riverside</em>.</h1>
+    <p class="hero__sub">Seasonal plates from the valley's organic farms and ranches, a craft cocktail &amp; wine bar, and views of the Applegate River — a remarkable table, outside the standard.</p>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section class="pad">
+  <div class="wrap about">
+    <div class="about__copy">
+      <span class="eyebrow eyebrow--burnt">Our table</span>
+      <span class="script">gather &amp; savor</span>
+      <h2 class="lead">Food &amp; drink, thoughtfully sourced from the heart of Southern Oregon.</h2>
+      <p>As a family of foodies, we built The Lindsay around the belief that the best experiences happen in beautiful places, over thoughtfully sourced food and drinks. Our kitchen partners with the organic farms, ranches and vineyards that surround us — the menu follows the season, and the river is always in view.</p>
+      <p>Join us for dinner, a craft cocktail at the bar, or a glass of Applegate Valley wine on the deck.</p>
+    </div>
+    <div class="about__media">
+      <img src="assets/outdoor-dining.jpg" alt="The outdoor dining room at The Lindsay">
+      <div class="tag"><b>On the river</b><small>Open Thursday–Sunday</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="pad menu" id="menu">
+  <div class="wrap">
+    <div class="menu__head">
+      <span class="eyebrow eyebrow--burnt">Menu highlights</span>
+      <h2>A taste of the season</h2>
+    </div>
+    <p class="menu__note">Locally sourced and changing with the season — a look at our current dinner menu.</p>
+
+    <div class="menu__cols">
+      <!-- Small Plates -->
+      <div class="mcard mcard--span">
+        <div class="mcat">Small Plates · great for sharing</div>
+        <div class="dish-grid">
+          <div class="dish">
+            <div class="dish__top"><span class="dish__name">Focaccia Bread</span><span class="dish__dots"></span><span class="dish__price">6</span></div>
+            <p class="dish__desc">Jacobsen sea salt · rosemary · tuscan oil.</p>
+          </div>
+          <div class="dish">
+            <div class="dish__top"><span class="dish__name">Patatas Bravas</span><span class="dish__dots"></span><span class="dish__price">11</span></div>
+            <p class="dish__desc">Crispy potatoes · garlic aioli · smoked paprika.<span class="dish__tag">V</span></p>
+          </div>
+          <div class="dish">
+            <div class="dish__top"><span class="dish__name">Cracked Brussels</span><span class="dish__dots"></span><span class="dish__price">14</span></div>
+            <p class="dish__desc">Shaved fennel · bacon · radicchio · preserved lemon · crisp garlic.</p>
+          </div>
+          <div class="dish">
+            <div class="dish__top"><span class="dish__name">Roasted Beets</span><span class="dish__dots"></span><span class="dish__price">12</span></div>
+            <p class="dish__desc">Goat cheese · hazelnuts · balsamic · fine herbs.</p>
+          </div>
+          <div class="dish">
+            <div class="dish__top"><span class="dish__name">Wings!</span><span class="dish__dots"></span><span class="dish__price">14</span></div>
+            <p class="dish__desc">Hot honey · chili lime crema · pickles.<span class="dish__tag">Hot</span></p>
+          </div>
+          <div class="dish">
+            <div class="dish__top"><span class="dish__name">Whipped Ricotta</span><span class="dish__dots"></span><span class="dish__price">13</span></div>
+            <p class="dish__desc">Cherry tomatoes · pistachio · balsamic · herbs · toasted focaccia.</p>
+          </div>
+          <div class="dish">
+            <div class="dish__top"><span class="dish__name">Mussels</span><span class="dish__dots"></span><span class="dish__price">24</span></div>
+            <p class="dish__desc">Calabrian chilies · spanish chorizo · white wine.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Salads -->
+      <div class="mcard">
+        <div class="mcat">Salads</div>
+        <div class="dish">
+          <div class="dish__top"><span class="dish__name">Wedge</span><span class="dish__dots"></span><span class="dish__price">14</span></div>
+          <p class="dish__desc">Iceberg · cherry tomato · red onion · bacon · Rogue Creamery blue cheese · toasted sunflower seeds.<span class="dish__tag">V</span></p>
+        </div>
+        <div class="dish">
+          <div class="dish__top"><span class="dish__name">Spring Greens</span><span class="dish__dots"></span><span class="dish__price">18</span></div>
+          <p class="dish__desc">Strawberries · burrata · fennel · citrus vinaigrette · almonds.<span class="dish__tag">V</span></p>
+        </div>
+      </div>
+
+      <!-- Desserts -->
+      <div class="mcard">
+        <div class="mcat">Desserts · made in house</div>
+        <div class="dish">
+          <div class="dish__top"><span class="dish__name">Lindsay Donuts</span><span class="dish__dots"></span><span class="dish__price">13</span></div>
+          <p class="dish__desc">Vanilla ricotta · dulce de leche · cream.</p>
+        </div>
+        <div class="dish">
+          <div class="dish__top"><span class="dish__name">Mud Pie</span><span class="dish__dots"></span><span class="dish__price">12</span></div>
+          <p class="dish__desc">Oreo crust · vanilla ice cream · chocolate fudge.</p>
+        </div>
+        <div class="dish">
+          <div class="dish__top"><span class="dish__name">Cheesecake</span><span class="dish__dots"></span><span class="dish__price">13</span></div>
+          <p class="dish__desc">Lemon swirl · blueberry compote.</p>
+        </div>
+        <div class="dish">
+          <div class="dish__top"><span class="dish__name">Sundae</span><span class="dish__dots"></span><span class="dish__price">7</span></div>
+          <p class="dish__desc">Ice cream · chocolate drizzle · cherry.</p>
+        </div>
+      </div>
+
+      <!-- Mains -->
+      <div class="mcard mcard--span">
+        <div class="mcat">Mains · sourced locally</div>
+        <div class="dish-grid">
+          <div class="dish">
+            <div class="dish__top"><span class="dish__name">The Lindsay Burger</span><span class="dish__dots"></span><span class="dish__price">19</span></div>
+            <p class="dish__desc">PNW beef · american cheese · pickles · lettuce · red onion · lindsay mayo · fries.</p>
+          </div>
+          <div class="dish">
+            <div class="dish__top"><span class="dish__name">Chicken Rosso</span><span class="dish__dots"></span><span class="dish__price">25</span></div>
+            <p class="dish__desc">Panko chicken · tomato basil · mozzarella · smoked paprika oil · preserved lemon vinaigrette.</p>
+          </div>
+          <div class="dish">
+            <div class="dish__top"><span class="dish__name">Veggie Burger</span><span class="dish__dots"></span><span class="dish__price">19</span></div>
+            <p class="dish__desc">Gardenburger patty · provolone · shredded lettuce · garlic aioli · red onion · pepperoncini · fries.<span class="dish__tag">V</span></p>
+          </div>
+          <div class="dish">
+            <div class="dish__top"><span class="dish__name">Tagliatelle</span><span class="dish__dots"></span><span class="dish__price">29</span></div>
+            <p class="dish__desc">Wild mushroom · brown butter · sage · pecorino.</p>
+          </div>
+          <div class="dish">
+            <div class="dish__top"><span class="dish__name">Pork Chop</span><span class="dish__dots"></span><span class="dish__price">35</span></div>
+            <p class="dish__desc">Radicchio · romano beans · roasted grapes · wild ramp · mustard seed vinaigrette.</p>
+          </div>
+          <div class="dish">
+            <div class="dish__top"><span class="dish__name">NY Strip</span><span class="dish__dots"></span><span class="dish__price">46</span></div>
+            <p class="dish__desc">PNW prime beef · togarashi smashed potatoes · ssamjang broccolini · chimichurri butter.</p>
+          </div>
+          <div class="dish">
+            <div class="dish__top"><span class="dish__name">Halibut</span><span class="dish__dots"></span><span class="dish__price">43</span></div>
+            <p class="dish__desc">Carrot purée · charred radish · grilled broccolini · herb vinaigrette.</p>
+          </div>
+          <div class="dish">
+            <div class="dish__top"><span class="dish__name">Steelhead</span><span class="dish__dots"></span><span class="dish__price">28</span></div>
+            <p class="dish__desc">Roasted fennel · beets · snap peas · lemon.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- More menus -->
+      <div class="mcard mcard--span" style="display:flex; align-items:center; justify-content:space-between; gap:30px; flex-wrap:wrap;">
+        <div>
+          <div class="mcat" style="margin-bottom:10px;">Also pouring &amp; serving</div>
+          <p class="dish__desc" style="max-width:52ch;">Full craft <strong>cocktail</strong> list and a <strong>Sunday Brunch</strong> menu (10am–1pm). Happy Hour daily 4–5:30. Parties of 8 or more are charged 20% gratuity.</p>
+        </div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <button class="btn btn--ghost" type="button" data-menu="cocktails">Cocktails →</button>
+          <button class="btn btn--ghost" type="button" data-menu="brunch">Sunday Brunch →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FROM THE KITCHEN -->
+<section style="padding:0;">
+  <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:0;">
+    <img src="https://static.wixstatic.com/media/81984b_8ba66c672a094509b82c125b601f7465~mv2.jpg/v1/fill/w_800,h_760,al_c,q_90,enc_auto/file.jpg" alt="Plated dish at The Lindsay" style="width:100%; height:clamp(240px,25vw,420px); object-fit:cover; display:block;">
+    <img src="https://static.wixstatic.com/media/81984b_ad8d7d6c3a92487285c8a9ebe6441233~mv2.jpg/v1/fill/w_800,h_760,al_c,q_90,enc_auto/file.jpg" alt="Seasonal plate from the kitchen" style="width:100%; height:clamp(240px,25vw,420px); object-fit:cover; display:block;">
+    <img src="assets/restaurant-dining.jpg" alt="The sunlit dining room with river and forest views through the windows" style="width:100%; height:clamp(240px,25vw,420px); object-fit:cover; display:block;">
+    <img src="https://static.wixstatic.com/media/81984b_0a9bca936b94469194dccaa8101a40cd~mv2.jpg/v1/fill/w_800,h_760,al_c,q_90,enc_auto/file.jpg" alt="A craft cocktail at the bar" style="width:100%; height:clamp(240px,25vw,420px); object-fit:cover; display:block;">
+  </div>
+</section>
+
+<!-- WINE band -->
+<section class="wine">
+  <img class="bg" src="https://static.wixstatic.com/media/81984b_113803cd90f74ca48119af8395006ec9~mv2.jpeg/v1/fill/w_2000,h_1100,al_c,q_90,enc_auto/file.jpeg" alt="The lodge beside the Applegate River">
+  <div class="wine__in">
+    <span class="script">eighteen &amp; eighteen</span>
+    <h2>Surrounded by Southern Oregon's finest vineyards</h2>
+    <p>Eighteen wineries sit within eighteen minutes of your table. Our list celebrates the neighbors — ask us to pair your meal with the valley.</p>
+    <div class="wine__stats">
+      <div class="s"><b>18</b><small>Wineries within 18 min</small></div>
+      <div class="s"><b>100%</b><small>Locally inspired menu</small></div>
+      <div class="s"><b>1</b><small>Craft bar on the river</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="pad" id="reviews">
+  <div class="wrap">
+    <div class="rev__head">
+      <span class="eyebrow">From our guests</span>
+      <h2>Tables they won't forget</h2>
+    </div>
+    <div class="rev__grid">
+      <div class="rcard"><div class="stars">★★★★★</div><p>"Hands down the best meal we've had in Southern Oregon. The steelhead was perfect and the wine pairing made the night."</p><div class="who">Dinner guest</div></div>
+      <div class="rcard"><div class="stars">★★★★★</div><p>"We came for a drink and stayed for hours. Craft cocktails, river views, and the warmest hospitality around."</p><div class="who">Bar guest</div></div>
+      <div class="rcard"><div class="stars">★★★★★</div><p>"A hidden gem in the Applegate. The setting on the river is stunning and every dish was beautifully done. We'll be back."</p><div class="who">Weekend traveler</div></div>
+    </div>
+    <p class="rev__src"><em>Sample quotes shown.</em> &nbsp;<a href="https://www.thelindsaylodge.com/review-links" target="_blank" rel="noopener" style="color:var(--burnt); font-weight:600; font-style:normal;">See real guest reviews →</a></p>
+  </div>
+</section>
+
+<!-- HOURS / RESERVE -->
+<section class="pad reserve" id="reserve">
+  <div class="wrap reserve__grid">
+    <div>
+      <span class="script">join us</span>
+      <h2>Reserve your table</h2>
+      <p>Dinner reservations are recommended, especially on weekends. Walk-ins are always welcome at the bar. Book online through OpenTable, or give us a call.</p>
+      <div style="display:flex; gap:14px; flex-wrap:wrap;">
+        <a class="btn btn--solid" href="https://www.opentable.com/r/the-lindsay-restaurant-reservations-applegate?restref=1335001&lang=en-US&ot_source=Restaurant%20website" target="_blank" rel="noopener">Reserve on OpenTable</a>
+        <a class="btn btn--ghost-light" href="tel:+15418466690">Call 541-846-6690</a>
+        <a class="btn btn--ghost-light" href="https://www.toasttab.com/the-lindsay-15100-oregon-238/giftcards" target="_blank" rel="noopener">Gift Cards</a>
+      </div>
+    </div>
+    <div>
+      <div class="hours">
+        <div class="row"><span class="d">Monday – Wednesday</span><span class="t closed">Closed</span></div>
+        <div class="row"><span class="d">Thursday – Sunday</span><span class="t">4 – 8 pm</span></div>
+        <div class="row"><span class="d">Happy Hour · daily</span><span class="t">4 – 5:30 pm</span></div>
+        <div class="row"><span class="d">Sunday Brunch</span><span class="t">10 am – 1 pm</span></div>
+      </div>
+      <p style="font-size:.82rem; color:var(--on-dark-mute); margin-top:16px;">Applegate Evening Market every Wednesday, 5–8 pm (seasonal). Parties of 8+ are charged 20% gratuity.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="foot__brand">
+        <img src="https://static.wixstatic.com/media/81984b_c04ca0d64a994e589d77ba62fd34f789~mv2.png/v1/fill/w_420,h_168,al_c,q_90,enc_auto/file.png" alt="The Lindsay Lodge">
+        <p>A destination rustic-luxury lodge in the Applegate Valley — the only full-service accommodation in Southern Oregon's wine country.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html#lodge">The Lodge</a></li>
+          <li><a href="restaurant.html">Restaurant</a></li>
+          <li><a href="weddings.html">Weddings &amp; Events</a></li>
+          <li><a href="https://wanderapplegate.com/" target="_blank" rel="noopener">Applegate Valley</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li>15100 HWY 238<br>Jacksonville, OR 97530</li>
+          <li><a href="tel:+15418466690">541-846-6690</a></li>
+          <li><a href="mailto:info@thelindsaylodge.com">info@thelindsaylodge.com</a></li>
+          <li><a href="https://www.instagram.com/thelindsaylodge/" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__bottom">
+      <span>© 2026 The Lindsay Lodge &amp; Restaurant</span>
+      <span><a href="https://www.thelindsaylodge.com/review-links" target="_blank" rel="noopener">Leave us a review</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- MENU OVERLAY -->
+<div class="mo" id="menuOverlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="moTitle">
+  <div class="mo__sheet" role="document">
+    <button class="mo__close" type="button" id="moClose" aria-label="Close menu">✕</button>
+
+    <!-- Cocktails -->
+    <div class="mo__panel" data-panel="cocktails">
+      <header class="mo__head">
+        <span class="eyebrow eyebrow--burnt">From the bar</span>
+        <h2 id="moTitle-cocktails">Cocktails</h2>
+        <p>Crafted in house. Happy Hour daily, 4–5:30 pm.</p>
+      </header>
+      <div class="mo__list">
+        <div class="modish"><div class="modish__row"><span class="modish__name">Lindsay Old Fashioned</span><span class="modish__price">13</span></div><p class="modish__desc">Applegate lavender · bitters · lemon twist · bourbon.</p></div>
+        <div class="modish"><div class="modish__row"><span class="modish__name">Calabrian Margarita</span><span class="modish__price">14</span></div><p class="modish__desc">Calabrian chili · lime · simple · tequila.</p></div>
+        <div class="modish"><div class="modish__row"><span class="modish__name">Lemon Poppy Fizz</span><span class="modish__price">13</span></div><p class="modish__desc">Poppyseed · almond · lemon · vodka · egg white.</p></div>
+        <div class="modish"><div class="modish__row"><span class="modish__name">Cucumber Cooler</span><span class="modish__price">13</span></div><p class="modish__desc">Cucumber · basil · lemon · gin · tonic.</p></div>
+        <div class="modish"><div class="modish__row"><span class="modish__name">Blood Orange Sour</span><span class="modish__price">14</span></div><p class="modish__desc">Blood orange · lemon · egg white · pisco.</p></div>
+        <div class="modish"><div class="modish__row"><span class="modish__name">Smoky Orange Mezcalita</span><span class="modish__price">15</span></div><p class="modish__desc">Orange · lime · oleo · mezcal.</p></div>
+        <div class="modish"><div class="modish__row"><span class="modish__name">Kaffir Lime Martini</span><span class="modish__price">14</span></div><p class="modish__desc">Kaffir lime · citrus · vodka.</p></div>
+        <div class="modish"><div class="modish__row"><span class="modish__name">Grapefruit Highball</span><span class="modish__price">13</span></div><p class="modish__desc">Grapefruit · mint · lime · soda · rum.</p></div>
+        <div class="modish"><div class="modish__row"><span class="modish__name">Spanish Coffee</span><span class="modish__price">15</span></div><p class="modish__desc">Espresso · 151 rum · orange liqueur · Kahlúa · amaretto whipped cream.</p></div>
+        <div class="modish"><div class="modish__row"><span class="modish__name">Espresso Martini</span><span class="modish__price">14</span></div><p class="modish__desc">Espresso · Irish cream · coffee liqueur · vanilla vodka.</p></div>
+      </div>
+    </div>
+
+    <!-- Brunch -->
+    <div class="mo__panel" data-panel="brunch">
+      <header class="mo__head">
+        <span class="eyebrow eyebrow--burnt">Sunday Brunch</span>
+        <h2 id="moTitle-brunch">Brunch</h2>
+        <p>Served every Sunday, 10 am – 1 pm.</p>
+      </header>
+      <div class="mo__list">
+        <div class="modish"><div class="modish__row"><span class="modish__name">Cinnamon Roll</span><span class="modish__price">8</span></div><p class="modish__desc">Brown sugar butter and vanilla bean glaze.</p></div>
+        <div class="modish"><div class="modish__row"><span class="modish__name">Biscuits &amp; Gravy</span><span class="modish__price">8</span></div><p class="modish__desc">Buttermilk biscuit · Johnny Dean sausage gravy · scallions.</p></div>
+        <div class="modish"><div class="modish__row"><span class="modish__name">Breakfast Sandwich</span><span class="modish__price">15</span></div><p class="modish__desc">Johnny Dean breakfast sausage · fried egg · american cheese · arugula · duke's mayo.</p></div>
+        <div class="modish"><div class="modish__row"><span class="modish__name">The Classic</span><span class="modish__price">18</span></div><p class="modish__desc">2 eggs · breakfast sausage patty or maple bacon · country potatoes · Farm &amp; Flour sourdough.</p></div>
+        <div class="modish"><div class="modish__row"><span class="modish__name">Banana Pancakes</span><span class="modish__price">14</span></div><p class="modish__desc">Fresh bananas · banana jam · maple syrup · whipped butter.</p></div>
+        <div class="modish"><div class="modish__row"><span class="modish__name">Chorizo Chilaquiles</span><span class="modish__price">17</span></div><p class="modish__desc">Chorizo · scrambled eggs · fried corn crisps · pickled onion · avocado chimichurri.</p></div>
+        <div class="modish"><div class="modish__row"><span class="modish__name">Ham &amp; Provolone Omelette</span><span class="modish__price">18</span></div><p class="modish__desc">3 eggs · roasted peppers · caramelized onions · smoked ham · provolone · arugula salad.</p></div>
+        <div class="modish"><div class="modish__row"><span class="modish__name">Garden Sourdough Toast</span><span class="modish__price">16</span></div><p class="modish__desc">Farm &amp; Flour sourdough · kumquat · arugula · rhubarb · chili crisp · fried egg.</p></div>
+        <div class="modish"><div class="modish__row"><span class="modish__name">Country Fried Steak</span><span class="modish__price">20</span></div><p class="modish__desc">Breaded top sirloin · country-style gravy · pickled mushrooms · country potatoes · arugula salad.</p></div>
+        <div class="modish"><div class="modish__row"><span class="modish__name">Fried Green Tomato Benedict</span><span class="modish__price">—</span></div><p class="modish__desc">Fried green tomatoes · maple bacon · arugula · yuzu hollandaise · country potatoes.</p></div>
+      </div>
+      <p class="mo__note">Brunch is seasonal — please confirm current availability before visiting.</p>
+    </div>
+
+    <footer class="mo__foot">
+      <a class="btn btn--solid" href="https://www.opentable.com/r/the-lindsay-restaurant-reservations-applegate?restref=1335001&lang=en-US&ot_source=Restaurant%20website" target="_blank" rel="noopener">Reserve a Table</a>
+      <a class="btn btn--ghost" href="tel:+15418466690">541-846-6690</a>
+    </footer>
+  </div>
+</div>
+
+<style>
+/* ===== Menu overlay ===== */
+.mo{ position:fixed; inset:0; z-index:300; display:flex; justify-content:flex-end;
+  background:rgba(11,28,36,0); opacity:0; pointer-events:none;
+  transition:background .4s var(--ease), opacity .4s var(--ease); }
+.mo.open{ background:rgba(11,28,36,.6); opacity:1; pointer-events:auto; }
+.mo__sheet{ position:relative; width:min(560px,100%); height:100%; background:var(--canvas); overflow-y:auto;
+  padding:70px 56px 48px; box-shadow:var(--shadow-lg); transform:translateX(40px); }
+.mo.open .mo__sheet{ transform:translateX(0); }
+.mo__close{ position:absolute; top:24px; right:28px; width:42px; height:42px; border-radius:var(--r-pill);
+  border:1px solid var(--line); background:var(--paper); color:var(--ink); font-size:1rem; cursor:pointer;
+  display:grid; place-items:center; transition:background .25s, color .25s; }
+.mo__close:hover{ background:var(--ink); color:#fff; border-color:var(--ink); }
+.mo__panel{ display:none; }
+.mo__panel.active{ display:block; animation:moFade .5s var(--ease); }
+@keyframes moFade{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:none; } }
+.mo__head{ margin-bottom:30px; padding-bottom:24px; border-bottom:1px solid var(--line); }
+.mo__head h2{ font-size:clamp(2.2rem,5vw,2.9rem); font-weight:600; margin:8px 0 0; }
+.mo__head p{ color:var(--fg-mute); font-size:.95rem; margin:10px 0 0; }
+.mo__list{ display:flex; flex-direction:column; }
+.modish{ padding:18px 0; border-bottom:1px solid var(--line); }
+.modish:last-child{ border-bottom:0; }
+.modish__row{ display:flex; align-items:baseline; gap:12px; }
+.modish__name{ font-family:var(--display); font-size:1.32rem; font-weight:600; color:var(--ink); }
+.modish__row::after{ content:""; flex:1; border-bottom:1.5px dotted var(--gold-dk); transform:translateY(-4px); opacity:.65; }
+.modish__price{ font-family:var(--display); font-size:1.2rem; font-weight:600; color:var(--ink); }
+.modish__desc{ color:var(--fg-soft); font-size:.94rem; margin:5px 0 0; }
+.mo__note{ font-size:.82rem; color:var(--fg-mute); font-style:italic; margin:24px 0 0; }
+.mo__foot{ display:flex; gap:12px; flex-wrap:wrap; margin-top:38px; padding-top:26px; border-top:1px solid var(--line); }
+@media(max-width:560px){ .mo__sheet{ padding:64px 26px 40px; } }
+</style>
+
+<script>
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('nav--scrolled', window.scrollY > 60);
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+  // Mobile nav
+  const burger = document.getElementById('navBurger');
+  const navMobile = document.getElementById('navMobile');
+  function closeNav() {
+    navMobile.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  burger.addEventListener('click', () => {
+    const open = !navMobile.classList.contains('open');
+    navMobile.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  document.getElementById('navMobileClose').addEventListener('click', closeNav);
+  navMobile.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+
+  // Menu overlay
+  const mo = document.getElementById('menuOverlay');
+  const panels = mo.querySelectorAll('.mo__panel');
+  let lastFocus = null;
+  function openMenu(which){
+    lastFocus = document.activeElement;
+    panels.forEach(p => p.classList.toggle('active', p.dataset.panel === which));
+    mo.setAttribute('aria-labelledby', 'moTitle-' + which);
+    mo.classList.add('open'); mo.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('moClose').focus();
+  }
+  function closeMenu(){
+    mo.classList.remove('open'); mo.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+    if(lastFocus) lastFocus.focus();
+  }
+  document.querySelectorAll('[data-menu]').forEach(btn =>
+    btn.addEventListener('click', () => openMenu(btn.dataset.menu)));
+  document.getElementById('moClose').addEventListener('click', closeMenu);
+  mo.addEventListener('click', e => { if(e.target === mo) closeMenu(); });
+  document.addEventListener('keydown', e => { if(e.key === 'Escape' && mo.classList.contains('open')) closeMenu(); });
+</script>
+</body>
+</html>

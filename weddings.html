@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Weddings | The Lindsay Lodge</title>
+<link rel="stylesheet" href="styles/brand.css">
+<style>
+/* ============ WEDDINGS — Direction A "Riverfront" language ============ */
+.wrap{ max-width:1240px; margin:0 auto; padding:0 40px; }
+.wrap--narrow{ max-width:980px; }
+
+/* NAV (shared) */
+.nav{ position:fixed; inset:0 0 auto 0; z-index:50; display:flex; align-items:center; justify-content:space-between;
+  padding:22px 44px; transition:all .4s var(--ease); }
+.nav__links{ display:flex; gap:34px; align-items:center; }
+.nav a.navlink{ font-family:var(--body); font-weight:600; font-size:.74rem; letter-spacing:.18em;
+  text-transform:uppercase; color:#fff; opacity:.92; transition:opacity .2s; position:relative; }
+.nav a.navlink:hover{ opacity:1; }
+.nav a.navlink.active{ opacity:1; }
+.nav a.navlink.active::after{ content:""; position:absolute; left:0; right:0; bottom:-7px; height:2px; background:var(--gold); }
+.nav__logo img{ height:42px; display:block; transition:filter .4s var(--ease); }
+.nav .btn{ padding:.85em 1.5em; }
+.nav--scrolled{ background:var(--canvas); padding:14px 44px; box-shadow:var(--shadow-sm); }
+.nav--scrolled a.navlink{ color:var(--ink); }
+.nav--scrolled a.navlink.active::after{ background:var(--burnt); }
+.nav--scrolled .nav__logo img{ filter:brightness(0) saturate(100%) invert(15%) sepia(34%) saturate(900%) hue-rotate(155deg) brightness(94%) contrast(92%); }
+.nav--scrolled .btn--ghost-light{ border-color:var(--ink); color:var(--ink); }
+.nav--scrolled .btn--ghost-light:hover{ background:var(--ink); color:#fff; }
+.nav__left{ display:flex; align-items:center; gap:42px; }
+
+/* HERO */
+.hero{ position:relative; height:90vh; min-height:640px; display:flex; align-items:center; justify-content:center;
+  text-align:center; color:#fff; overflow:hidden; }
+.hero img.bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.hero::after{ content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(11,28,36,.42) 0%, rgba(11,28,36,.16) 40%, rgba(11,28,36,.6) 100%); }
+.hero__in{ position:relative; z-index:2; padding:0 24px; max-width:920px; }
+.hero .eyebrow{ color:var(--gold); margin-bottom:20px; display:block; }
+.hero .script{ color:var(--gold); font-size:clamp(2.6rem,5vw,4rem); display:block; margin-bottom:-6px; }
+.hero h1{ color:#fff; font-size:clamp(3rem,7.4vw,6.6rem); font-weight:500; line-height:.96; text-shadow:0 2px 40px rgba(0,0,0,.35); }
+.hero h1 em{ font-style:italic; color:var(--gold); }
+.hero__sub{ margin:28px auto 36px; max-width:50ch; font-size:1.12rem; font-weight:300; color:rgba(255,255,255,.92); }
+.hero__cta{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+
+.pad{ padding:114px 0; }
+.eyebrow--burnt{ color:var(--burnt); }
+.lead{ font-family:var(--display); font-size:clamp(2rem,3.4vw,3rem); font-weight:500; line-height:1.12; color:var(--ink); }
+
+/* INTRO */
+.intro{ text-align:center; max-width:880px; margin:0 auto; }
+.intro .script{ color:var(--spa-dk); font-size:clamp(2.4rem,4.4vw,3.4rem); display:block; }
+.intro h2{ font-size:clamp(2.2rem,3.8vw,3.2rem); font-weight:500; margin:6px 0 0; }
+.intro p{ color:var(--fg-soft); margin:24px auto 0; max-width:60ch; }
+
+/* SPACES — alternating feature rows */
+.spaces{ display:flex; flex-direction:column; gap:0; }
+.frow{ display:grid; grid-template-columns:1fr 1fr; gap:0; align-items:center; }
+.frow__media{ position:relative; min-height:560px; }
+.frow__media img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.frow__copy{ padding:92px 84px; }
+.frow:nth-child(even) .frow__copy{ background:var(--canvas-2); }
+.frow--flip .frow__media{ order:2; }
+.frow__copy .num{ font-family:var(--display); font-style:italic; color:var(--gold-dk); font-size:1.05rem; }
+.frow__copy h3{ font-size:clamp(2rem,3.2vw,2.7rem); font-weight:600; margin:8px 0 0; }
+.frow__copy p{ color:var(--fg-soft); margin:18px 0 0; max-width:40ch; }
+.frow__copy .meta{ margin-top:24px; display:flex; gap:30px; flex-wrap:wrap; }
+.frow__copy .meta .m b{ font-family:var(--display); font-size:1.8rem; color:var(--ink); display:block; line-height:1; }
+.frow__copy .meta .m small{ font-size:.66rem; letter-spacing:.16em; text-transform:uppercase; color:var(--fg-mute); }
+
+/* PACKAGE — what's included */
+.pkg{ background:var(--ink); color:var(--on-dark); }
+.pkg__head{ text-align:center; max-width:720px; margin:0 auto 56px; }
+.pkg__head .script{ color:var(--gold); font-size:2.4rem; display:block; }
+.pkg__head h2{ color:#fff; font-size:clamp(2.2rem,3.8vw,3.2rem); font-weight:500; margin-top:4px; }
+.pkg__head p{ color:var(--on-dark-mute); margin-top:18px; }
+.pkg__grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px 30px; }
+.pkg__item{ display:flex; gap:14px; align-items:flex-start; padding:20px 0; border-top:1px solid rgba(255,255,255,.14); }
+.pkg__item .ck{ color:var(--gold); font-size:1.1rem; line-height:1.4; flex:none; }
+.pkg__item .t{ font-size:1rem; color:#fff; }
+.pkg__item .t small{ display:block; color:var(--on-dark-mute); font-size:.84rem; margin-top:3px; }
+
+/* PHOTO band full-bleed */
+.band{ position:relative; height:64vh; min-height:460px; display:flex; align-items:center; justify-content:center; text-align:center; color:#fff; overflow:hidden; }
+.band img.bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.band::after{ content:""; position:absolute; inset:0; background:rgba(16,38,48,.46); }
+.band__in{ position:relative; z-index:2; max-width:880px; padding:0 30px; }
+.band .script{ color:var(--gold); font-size:clamp(2.6rem,5vw,4rem); display:block; margin-bottom:10px; }
+.band p{ font-family:var(--display); font-style:italic; font-size:clamp(1.5rem,2.5vw,2.1rem); line-height:1.35; color:#fff; }
+
+/* GALLERY masonry */
+.gal__head{ display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:40px; flex-wrap:wrap; gap:18px; }
+.gal__head h2{ font-size:clamp(2.2rem,3.6vw,3.2rem); font-weight:500; }
+.gal__head .eyebrow{ color:var(--burnt); display:block; margin-bottom:10px; }
+.masonry{ columns:3; column-gap:16px; }
+.masonry img{ width:100%; margin-bottom:16px; border-radius:var(--r-sm); display:block; break-inside:avoid; cursor:zoom-in; transition:filter .3s var(--ease); }
+.masonry img:hover{ filter:brightness(1.06); }
+
+/* INQUIRE split */
+.inquire{ background:var(--canvas-2); }
+.inquire__grid{ display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:start; }
+.inquire .script{ color:var(--spa-dk); font-size:2.4rem; display:block; }
+.inquire h2{ font-size:clamp(2.2rem,3.8vw,3.2rem); font-weight:500; margin:4px 0 0; }
+.inquire p{ color:var(--fg-soft); margin:22px 0 0; max-width:34em; }
+.inquire__contact{ margin-top:30px; display:flex; flex-direction:column; gap:16px; }
+.inquire__contact .row{ display:flex; gap:16px; align-items:baseline; border-top:1px solid var(--line); padding-top:16px; }
+.inquire__contact .row .k{ font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--fg-mute); min-width:78px; }
+.inquire__contact .row .v{ color:var(--ink); font-size:1.05rem; }
+.form{ background:var(--paper); border:1px solid var(--line); border-radius:var(--r-md); padding:40px; box-shadow:var(--shadow-sm); display:flex; flex-direction:column; gap:14px; }
+.form .two{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.form label{ font-size:.66rem; letter-spacing:.16em; text-transform:uppercase; color:var(--fg-mute); margin-bottom:-6px; }
+.form input,.form textarea,.form select{ background:var(--canvas); border:1px solid var(--line); border-radius:var(--r-sm);
+  padding:13px 15px; font-family:var(--body); font-size:.96rem; color:var(--ink); width:100%; }
+.form input:focus,.form textarea:focus,.form select:focus{ outline:2px solid var(--spa); border-color:var(--spa); }
+
+footer{ background:#0f2630; color:var(--on-dark-mute); padding:70px 0 40px; }
+.foot{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:48px; }
+.foot__brand img{ height:44px; margin-bottom:18px; }
+.foot__brand p{ font-size:.92rem; max-width:26em; }
+.foot h4{ color:#fff; font-family:var(--body); font-size:.72rem; letter-spacing:.22em; text-transform:uppercase; margin:0 0 18px; }
+.foot ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px; }
+.foot a:hover{ color:var(--gold); }
+.foot__bottom{ margin-top:54px; padding-top:24px; border-top:1px solid rgba(255,255,255,.12); display:flex; justify-content:space-between; font-size:.78rem; color:rgba(255,255,255,.5); flex-wrap:wrap; gap:12px; }
+
+.lb{ position:fixed; inset:0; z-index:200; background:rgba(8,20,26,.94); display:none; align-items:center; justify-content:center; padding:40px; cursor:zoom-out; }
+.lb.open{ display:flex; } .lb img{ max-width:92vw; max-height:90vh; border-radius:var(--r-sm); box-shadow:var(--shadow-lg); }
+
+@media(max-width:980px){
+  .frow,.frow--flip,.inquire__grid{ grid-template-columns:1fr; }
+  .frow--flip .frow__media{ order:0; } .frow__media{ min-height:62vh; } .frow__copy{ padding:60px 40px; }
+  .pkg__grid{ grid-template-columns:1fr 1fr; } .masonry{ columns:2; }
+  .nav__links{ display:none; } .nav__left{ gap:0; }
+  .foot{ grid-template-columns:1fr 1fr; }
+}
+@media(max-width:560px){ .masonry{ columns:1; } .pkg__grid{ grid-template-columns:1fr; } .form .two{ grid-template-columns:1fr; } .wrap{ padding:0 22px; } .foot{ grid-template-columns:1fr; } }
+
+/* Mobile burger & drawer */
+.nav__burger{ display:none; background:none; border:none; cursor:pointer; padding:6px; flex-direction:column; gap:5px; align-items:center; justify-content:center; }
+.nav__burger span{ display:block; width:22px; height:2px; background:#fff; border-radius:2px; transition:transform .3s var(--ease), opacity .2s, background .4s var(--ease); }
+.nav--scrolled .nav__burger span{ background:var(--ink); }
+.nav__burger[aria-expanded="true"] span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+.nav__burger[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+.nav__burger[aria-expanded="true"] span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+.nav__mobile{ position:fixed; inset:0 0 auto 0; z-index:49; background:var(--canvas); padding:86px 44px 36px; display:flex; flex-direction:column; opacity:0; pointer-events:none; transform:translateY(-12px); transition:opacity .32s var(--ease), transform .32s var(--ease); box-shadow:var(--shadow-md); }
+.nav__mobile.open{ opacity:1; transform:none; pointer-events:auto; }
+.nav__mobile a{ font-family:var(--body); font-weight:600; font-size:.8rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ink); padding:16px 0; border-bottom:1px solid var(--line); display:block; }
+.nav__mobile > a:last-of-type{ border-bottom:none; }
+.nav__mobile__close{ position:absolute; top:20px; right:22px; background:none; border:1px solid var(--line); border-radius:var(--r-pill); width:36px; height:36px; display:grid; place-items:center; cursor:pointer; color:var(--ink); font-size:.95rem; transition:background .2s, color .2s; }
+.nav__mobile__close:hover{ background:var(--ink); color:#fff; border-color:var(--ink); }
+.nav--scrolled .btn--sms{ color:var(--gold-dk); border-color:var(--gold-dk); }
+.nav--scrolled .btn--sms:hover{ background:var(--gold-dk); color:#fff; }
+.nav__mobile__sms{ margin-top:18px; padding-top:22px; border-top:1px solid var(--line); }
+.nav__mobile .nav__mobile__sms a{ border-bottom:none; padding:0; color:var(--gold-dk); font-size:.76rem; letter-spacing:.14em; }
+.nav__mobile .nav__mobile__sms a:hover{ color:var(--burnt); }
+@media(max-width:980px){ .nav__burger{ display:flex; } .nav__sms-desktop{ display:none; } }
+</style>
+</head>
+<body data-screen-label="Weddings">
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav__left">
+    <button class="nav__burger" id="navBurger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <a class="nav__logo" href="index.html"><img src="https://static.wixstatic.com/media/81984b_c04ca0d64a994e589d77ba62fd34f789~mv2.png/v1/fill/w_420,h_168,al_c,q_90,enc_auto/file.png" alt="The Lindsay Lodge"></a>
+    <div class="nav__links">
+      <a class="navlink" href="index.html#lodge">The Lodge</a>
+      <a class="navlink" href="restaurant.html">Restaurant</a>
+      <a class="navlink active" href="weddings.html">Weddings</a>
+      <a class="navlink" href="index.html#gallery">Gallery</a>
+      <a class="navlink" href="#inquire">Contact</a>
+    </div>
+  </div>
+  <div style="display:flex;gap:10px;align-items:center;">
+    <a class="btn btn--ghost-light nav__sms-desktop" href="https://mailchi.mp/thelindsaylodge/sms-signup" target="_blank" rel="noopener">SMS Updates</a>
+    <a class="btn btn--ghost-light" href="#inquire">Inquire</a>
+  </div>
+</nav>
+<div class="nav__mobile" id="navMobile">
+  <button class="nav__mobile__close" id="navMobileClose" aria-label="Close menu">✕</button>
+  <a href="index.html#lodge">The Lodge</a>
+  <a href="restaurant.html">Restaurant</a>
+  <a href="weddings.html">Weddings</a>
+  <a href="index.html#gallery">Gallery</a>
+  <a href="#inquire">Contact</a>
+  <div class="nav__mobile__sms">
+    <a href="https://mailchi.mp/thelindsaylodge/sms-signup" target="_blank" rel="noopener">Sign up for text updates</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <img class="bg" src="https://static.wixstatic.com/media/81984b_675765f142314e3488de2a08fd273027~mv2.webp/v1/fill/w_2000,h_1300,al_c,q_90,enc_auto/file.webp" alt="A wedding ceremony in the courtyard at The Lindsay Lodge">
+  <div class="hero__in">
+    <span class="eyebrow">Weddings at The Lindsay</span>
+    <span class="script">happily ever after</span>
+    <h1>Marry on the <em>river</em>.</h1>
+    <p class="hero__sub">A picturesque riverfront venue, a courtyard made for vows, and a full team to make your day effortless — turn a few hours into a whole weekend celebration.</p>
+    <div class="hero__cta">
+      <a class="btn btn--solid" href="#inquire">Inquire About Your Date</a>
+      <a class="btn btn--ghost-light" href="#gallery">See the Venue</a>
+    </div>
+  </div>
+</header>
+
+<!-- INTRO -->
+<section class="pad">
+  <div class="wrap intro">
+    <span class="script">your day, beautifully</span>
+    <h2>The stress-free wedding you've always dreamed of.</h2>
+    <p>Weddings at The Lindsay are typically held outdoors in our garden courtyard, surrounded by flowers, trees and the sound of the Applegate. Our package is built so the setup is painless for you — our staff handles the details, our culinary team prepares the food, and the lodge becomes exclusively yours for the celebration.</p>
+  </div>
+</section>
+
+<!-- SPACES -->
+<section class="spaces">
+  <!-- Courtyard -->
+  <div class="frow">
+    <div class="frow__media"><img src="https://static.wixstatic.com/media/81984b_675765f142314e3488de2a08fd273027~mv2.webp/v1/fill/w_1200,h_1200,al_c,q_90,enc_auto/file.webp" alt="The courtyard ceremony space, framed by greenery and the river"></div>
+    <div class="frow__copy">
+      <span class="num">The setting</span>
+      <h3>The Courtyard</h3>
+      <p>Say your vows outdoors in our expansive courtyard — framed by greenery, blooms and the historic bridge. It's the picture-perfect ceremony space, and it flows straight into your celebration.</p>
+      <div class="meta">
+        <div class="m"><b>125</b><small>Ceremony guests</small></div>
+        <div class="m"><b>Outdoor</b><small>Garden &amp; riverside</small></div>
+      </div>
+    </div>
+  </div>
+  <!-- Lodge -->
+  <div class="frow frow--flip">
+    <div class="frow__media"><img src="https://static.wixstatic.com/media/81984b_90711db2d5f74b429ea5c21825379c1e~mv2.webp/v1/fill/w_1200,h_1200,al_c,q_90,enc_auto/file.webp" alt="The lodge dressed for a wedding celebration"></div>
+    <div class="frow__copy">
+      <span class="num">The celebration</span>
+      <h3>The Lodge, exclusively yours</h3>
+      <p>The lodge becomes yours alone — a quiet place for guests to relax, and a stunning spot for your reception or after-party. It sleeps 20+ across seven river-view rooms, so your closest people stay right where the magic is.</p>
+      <div class="meta">
+        <div class="m"><b>7</b><small>River-view rooms</small></div>
+        <div class="m"><b>20+</b><small>Guests sleep on site</small></div>
+      </div>
+    </div>
+  </div>
+  <!-- Catering -->
+  <div class="frow">
+    <div class="frow__media"><img src="https://static.wixstatic.com/media/81984b_b0ad2cbff72044649e61accaece399fb~mv2.webp/v1/fill/w_1200,h_1200,al_c,q_90,enc_auto/file.webp" alt="A candlelit wedding reception dinner at The Lindsay"></div>
+    <div class="frow__copy">
+      <span class="num">The table</span>
+      <h3>Catering &amp; the bar</h3>
+      <p>Our culinary team prepares your meal from an extensive catering menu, sourced from the valley's farms and ranches. A tended bar — cash or hosted — keeps the evening flowing, with local Applegate wine on hand.</p>
+      <div class="meta">
+        <div class="m"><b>Full</b><small>Catering &amp; bar service</small></div>
+        <div class="m"><b>18</b><small>Wineries within 18 min</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGE -->
+<section class="pad pkg">
+  <div class="wrap">
+    <div class="pkg__head">
+      <span class="script">all taken care of</span>
+      <h2>What's included</h2>
+      <p>Our wedding package is designed for a beautiful, stress-free day — here's what comes with your celebration at The Lindsay.</p>
+    </div>
+    <div class="pkg__grid">
+      <div class="pkg__item"><span class="ck">✓</span><span class="t">Seating for up to 125<small>Chairs &amp; tables included</small></span></div>
+      <div class="pkg__item"><span class="ck">✓</span><span class="t">Linens<small>Table linens provided</small></span></div>
+      <div class="pkg__item"><span class="ck">✓</span><span class="t">Place settings<small>Plates, napkins &amp; silverware</small></span></div>
+      <div class="pkg__item"><span class="ck">✓</span><span class="t">Tended bar<small>Cash or hosted setup</small></span></div>
+      <div class="pkg__item"><span class="ck">✓</span><span class="t">Extensive catering menu<small>Prepared by our culinary team</small></span></div>
+      <div class="pkg__item"><span class="ck">✓</span><span class="t">Our staff &amp; setup<small>We handle the details</small></span></div>
+      <div class="pkg__item"><span class="ck">✓</span><span class="t">Exclusive lodge use<small>The lodge is yours</small></span></div>
+      <div class="pkg__item"><span class="ck">✓</span><span class="t">On-site lodging<small>Sleeps 20+ across 7 rooms</small></span></div>
+      <div class="pkg__item"><span class="ck">✓</span><span class="t">Outdoor courtyard<small>Ceremony &amp; reception</small></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO BAND -->
+<section class="band">
+  <img class="bg" src="https://static.wixstatic.com/media/81984b_bfa6c7b13e3243cb8f933a6303a5e4e7~mv2.jpg/v1/fill/w_2000,h_1200,al_c,q_90,enc_auto/file.jpg" alt="A couple celebrates their wedding by the Applegate River">
+  <div class="band__in">
+    <span class="script">a weekend to remember</span>
+    <p>"Make your special day a weekend celebration instead of just a few hours — with our picturesque venue and full staff, you won't be disappointed."</p>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="pad" id="gallery">
+  <div class="wrap">
+    <div class="gal__head">
+      <div><span class="eyebrow">Real celebrations</span><h2>Weddings at The Lindsay</h2></div>
+      <a class="btn btn--ghost" href="#inquire">Plan Yours →</a>
+    </div>
+    <div class="masonry" id="masonry">
+      <img src="https://static.wixstatic.com/media/81984b_03b260f5144a4d2fb3e0e4d36ff6433e~mv2.jpg/v1/fill/w_820,h_1100,al_c,q_90,enc_auto/file.jpg" alt="Wedding detail at The Lindsay">
+      <img src="https://static.wixstatic.com/media/81984b_f3122ef63277489fada1cfdfb8c64f00~mv2.webp/v1/fill/w_900,h_620,al_c,q_90,enc_auto/file.webp" alt="Reception table setting with candelabra">
+      <img src="https://static.wixstatic.com/media/81984b_c963650d24dc4e03bd585363a6c2e505~mv2.jpg/v1/fill/w_820,h_1120,al_c,q_90,enc_auto/file.jpg" alt="Couple beneath the wooden arbor">
+      <img src="https://static.wixstatic.com/media/81984b_b0ad2cbff72044649e61accaece399fb~mv2.webp/v1/fill/w_900,h_620,al_c,q_90,enc_auto/file.webp" alt="Candlelit reception dinner">
+      <img src="https://static.wixstatic.com/media/81984b_bfa6c7b13e3243cb8f933a6303a5e4e7~mv2.jpg/v1/fill/w_820,h_1100,al_c,q_90,enc_auto/file.jpg" alt="Couple by the Applegate River">
+      <img src="https://static.wixstatic.com/media/81984b_27bb0647e7c84eb08d3491e9626da084~mv2.webp/v1/fill/w_820,h_900,al_c,q_90,enc_auto/file.webp" alt="Wedding moment at The Lindsay">
+      <img src="https://static.wixstatic.com/media/81984b_675765f142314e3488de2a08fd273027~mv2.webp/v1/fill/w_900,h_640,al_c,q_90,enc_auto/file.webp" alt="Ceremony in the courtyard">
+      <img src="https://static.wixstatic.com/media/81984b_ff7539d476ff481b884ab9fe0c6b87a4~mv2.jpeg/v1/fill/w_820,h_1080,al_c,q_90,enc_auto/file.jpeg" alt="Rose-covered ceremony arbor">
+      <img src="https://static.wixstatic.com/media/81984b_bc4481cca94f409e80e619606e7650b5~mv2.webp/v1/fill/w_820,h_1100,al_c,q_90,enc_auto/file.webp" alt="Wedding day detail">
+      <img src="https://static.wixstatic.com/media/81984b_9e159ea9d70242e99643ba119f3e299b~mv2.jpg/v1/fill/w_900,h_640,al_c,q_90,enc_auto/file.jpg" alt="Bridal bouquet of roses">
+      <img src="https://static.wixstatic.com/media/81984b_3a0810bbb7a74aa8b31be51e99a9a39c~mv2.jpeg/v1/fill/w_820,h_1120,al_c,q_90,enc_auto/file.jpeg" alt="Garden courtyard arbor">
+      <img src="https://static.wixstatic.com/media/81984b_90711db2d5f74b429ea5c21825379c1e~mv2.webp/v1/fill/w_900,h_640,al_c,q_90,enc_auto/file.webp" alt="The lodge dressed for a wedding">
+    </div>
+  </div>
+</section>
+
+<!-- INQUIRE -->
+<section class="pad inquire" id="inquire">
+  <div class="wrap inquire__grid">
+    <div>
+      <span class="script">let's talk</span>
+      <h2>Inquire about your wedding</h2>
+      <p>Tell us about your day and we'll share package details and availability. Our events coordinator, Anna, will reach out personally.</p>
+      <div class="inquire__contact">
+        <div class="row"><span class="k">Coordinator</span><span class="v">Anna</span></div>
+        <div class="row"><span class="k">Phone</span><span class="v"><a href="tel:+15417787971">541-778-7971</a></span></div>
+        <div class="row"><span class="k">Email</span><span class="v"><a href="mailto:anna@thelindsaylodge.com">anna@thelindsaylodge.com</a></span></div>
+        <div class="row"><span class="k">Venue</span><span class="v">15100 HWY 238, Jacksonville, OR</span></div>
+      </div>
+    </div>
+    <form class="form" name="wedding-inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="wedding-inquiry">
+      <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+      <div class="two">
+        <div><label>First name</label><input type="text" name="first-name" required></div>
+        <div><label>Last name</label><input type="text" name="last-name" required></div>
+      </div>
+      <div><label>Email</label><input type="email" name="email" required></div>
+      <div class="two">
+        <div><label>Estimated date</label><input type="text" name="date" placeholder="e.g. Sept 2026"></div>
+        <div><label>Guest count</label><input type="number" name="guest-count" placeholder="e.g. 100"></div>
+      </div>
+      <div><label>Tell us about your day</label><textarea rows="4" name="message" placeholder="Your vision, questions, anything…"></textarea></div>
+      <button type="submit" class="btn btn--solid" style="align-self:flex-start;">Send Inquiry</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="foot__brand">
+        <img src="https://static.wixstatic.com/media/81984b_c04ca0d64a994e589d77ba62fd34f789~mv2.png/v1/fill/w_420,h_168,al_c,q_90,enc_auto/file.png" alt="The Lindsay Lodge">
+        <p>A destination rustic-luxury lodge in the Applegate Valley — the only full-service accommodation in Southern Oregon's wine country.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html#lodge">The Lodge</a></li>
+          <li><a href="restaurant.html">Restaurant</a></li>
+          <li><a href="weddings.html">Weddings &amp; Events</a></li>
+          <li><a href="https://wanderapplegate.com/" target="_blank" rel="noopener">Applegate Valley</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Weddings</h4>
+        <ul>
+          <li>Anna — Events</li>
+          <li><a href="tel:+15417787971">541-778-7971</a></li>
+          <li><a href="mailto:anna@thelindsaylodge.com">anna@thelindsaylodge.com</a></li>
+          <li><a href="https://www.instagram.com/thelindsaylodge/" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__bottom">
+      <span>© 2026 The Lindsay Lodge &amp; Restaurant</span>
+      <span>Gather · Eat · Celebrate</span>
+    </div>
+  </div>
+</footer>
+
+<div class="lb" id="lb"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt=""></div>
+
+<script>
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('nav--scrolled', window.scrollY > 60);
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+  // Mobile nav
+  const burger = document.getElementById('navBurger');
+  const navMobile = document.getElementById('navMobile');
+  function closeNav() {
+    navMobile.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  burger.addEventListener('click', () => {
+    const open = !navMobile.classList.contains('open');
+    navMobile.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  document.getElementById('navMobileClose').addEventListener('click', closeNav);
+  navMobile.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+  const lb = document.getElementById('lb'), lbImg = lb.querySelector('img');
+  document.getElementById('masonry').addEventListener('click', e=>{
+    if(e.target.tagName==='IMG'){ lbImg.src = e.target.src.replace(/w_\d+,h_\d+/, 'w_1500,h_1100'); lb.classList.add('open'); }
+  });
+  lb.addEventListener('click', ()=> lb.classList.remove('open'));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') lb.classList.remove('open'); });
+</script>
+</body>
+</html>

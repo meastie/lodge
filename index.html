@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Lindsay Lodge — Riverfront</title>
+<link rel="stylesheet" href="styles/brand.css">
+<style>
+/* ============ DIRECTION A — "RIVERFRONT" : editorial calm ============ */
+.wrap{ max-width:1240px; margin:0 auto; padding:0 40px; }
+
+/* Top bar / nav */
+.nav{ position:fixed; inset:0 0 auto 0; z-index:50; display:flex; align-items:center;
+  justify-content:space-between; padding:22px 44px; transition:all .4s var(--ease); }
+.nav__links{ display:flex; gap:34px; align-items:center; }
+.nav a.navlink{ font-family:var(--body); font-weight:600; font-size:.74rem; letter-spacing:.18em;
+  text-transform:uppercase; color:#fff; opacity:.92; transition:opacity .2s; }
+.nav a.navlink:hover{ opacity:1; }
+.nav__logo img{ height:42px; display:block; transition:filter .4s var(--ease); }
+.nav .btn{ padding:.85em 1.5em; }
+.nav--scrolled{ background:var(--canvas); padding:14px 44px; box-shadow:var(--shadow-sm); }
+.nav--scrolled a.navlink{ color:var(--ink); }
+.nav--scrolled .nav__logo img{ filter:brightness(0) saturate(100%) invert(15%) sepia(34%) saturate(900%) hue-rotate(155deg) brightness(94%) contrast(92%); }
+.nav--scrolled .btn--ghost-light{ border-color:var(--ink); color:var(--ink); }
+.nav--scrolled .btn--ghost-light:hover{ background:var(--ink); color:#fff; }
+.nav__left{ display:flex; align-items:center; gap:42px; }
+
+/* Hero */
+.hero{ position:relative; height:100vh; min-height:680px; display:flex; align-items:center;
+  justify-content:center; text-align:center; color:#fff; overflow:hidden; }
+.hero img.bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.hero::after{ content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(11,28,36,.46) 0%, rgba(11,28,36,.18) 38%, rgba(11,28,36,.62) 100%); }
+.hero__in{ position:relative; z-index:2; padding:0 24px; max-width:980px; }
+.hero .eyebrow{ color:var(--gold); margin-bottom:26px; }
+.hero h1{ color:#fff; font-size:clamp(3.4rem,8.2vw,7.6rem); font-weight:500; line-height:.96;
+  letter-spacing:.01em; text-shadow:0 2px 40px rgba(0,0,0,.35); }
+.hero h1 em{ font-style:italic; color:var(--gold); }
+.hero__sub{ margin:30px auto 38px; max-width:560px; font-size:1.12rem; font-weight:300;
+  color:rgba(255,255,255,.92); letter-spacing:.01em; }
+.hero__cta{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+.scrollcue{ position:absolute; bottom:34px; left:50%; transform:translateX(-50%); z-index:3;
+  color:rgba(255,255,255,.8); font-size:.66rem; letter-spacing:.3em; text-transform:uppercase;
+  display:flex; flex-direction:column; align-items:center; gap:10px; }
+.scrollcue span{ width:1px; height:46px; background:linear-gradient(rgba(255,255,255,.7),transparent); }
+
+/* Section scaffolding */
+section{ position:relative; }
+.pad{ padding:118px 0; }
+.eyebrow--burnt{ color:var(--burnt); }
+.lead{ font-family:var(--display); font-size:clamp(2rem,3.4vw,3rem); font-weight:500;
+  line-height:1.12; color:var(--ink); }
+
+/* Welcome — asymmetric */
+.welcome{ display:grid; grid-template-columns:1.05fr 1fr; gap:84px; align-items:center; }
+.welcome__copy .eyebrow{ display:block; margin-bottom:20px; }
+.welcome__copy p{ color:var(--fg-soft); margin:22px 0 0; max-width:30em; }
+.welcome__copy .script{ font-size:2.6rem; color:var(--spa-dk); display:block; margin-bottom:6px; }
+.welcome__media{ position:relative; }
+.welcome__media img{ width:100%; height:560px; object-fit:cover; border-radius:var(--r-md); display:block; box-shadow:var(--shadow-md); }
+.welcome__media .tag{ position:absolute; left:-26px; bottom:36px; background:var(--ink); color:var(--on-dark);
+  padding:18px 26px; border-radius:var(--r-md); box-shadow:var(--shadow-md); }
+.welcome__media .tag b{ font-family:var(--display); font-size:1.9rem; font-weight:600; display:block; line-height:1; color:#fff; }
+.welcome__media .tag small{ font-size:.66rem; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); }
+
+/* Experiences three-up */
+.exp{ background:var(--canvas-2); }
+.exp__head{ text-align:center; max-width:680px; margin:0 auto 64px; }
+.exp__head h2{ font-size:clamp(2.4rem,4vw,3.4rem); font-weight:500; margin-top:14px; }
+.exp__grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+.card{ background:var(--paper); border-radius:var(--r-md); overflow:hidden; box-shadow:var(--shadow-sm);
+  transition:transform .4s var(--ease), box-shadow .4s var(--ease); }
+.card:hover{ transform:translateY(-6px); box-shadow:var(--shadow-md); }
+.card img{ width:100%; height:300px; object-fit:cover; display:block; }
+.card__body{ padding:30px 30px 36px; }
+.card__body h3{ font-size:1.7rem; font-weight:600; }
+.card__body p{ color:var(--fg-soft); font-size:.97rem; margin:12px 0 20px; }
+.card__link{ font-family:var(--body); font-weight:600; font-size:.74rem; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--burnt); display:inline-flex; gap:.5em; }
+.card__link:hover{ gap:.9em; }
+
+/* Quote band over river */
+.quote{ position:relative; padding:160px 0; text-align:center; color:#fff; overflow:hidden; }
+.quote img.bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.quote::after{ content:""; position:absolute; inset:0; background:rgba(16,38,48,.58); }
+.quote__in{ position:relative; z-index:2; max-width:900px; margin:0 auto; padding:0 30px; }
+.quote .script{ font-size:clamp(2.6rem,5vw,4.2rem); color:var(--gold); margin-bottom:18px; }
+.quote p{ font-family:var(--display); font-size:clamp(1.6rem,2.6vw,2.3rem); font-weight:400;
+  font-style:italic; line-height:1.3; color:#fff; }
+.quote .cite{ display:block; margin-top:28px; font-family:var(--body); font-style:normal;
+  font-size:.74rem; letter-spacing:.26em; text-transform:uppercase; color:rgba(255,255,255,.8); }
+
+/* Stats strip */
+.stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.stat{ text-align:center; padding:54px 18px; border-right:1px solid var(--line); }
+.stat:last-child{ border-right:0; }
+.stat b{ font-family:var(--display); font-size:3.2rem; font-weight:600; color:var(--ink); display:block; line-height:1; }
+.stat small{ font-size:.68rem; letter-spacing:.2em; text-transform:uppercase; color:var(--fg-mute); margin-top:12px; display:block; }
+
+/* Gallery strip */
+.gallery__head{ display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:38px; flex-wrap:wrap; gap:20px; }
+.gallery__head h2{ font-size:clamp(2.2rem,3.6vw,3.2rem); font-weight:500; }
+.gmasonry{ columns:3; column-gap:18px; }
+.gmasonry img{ width:100%; margin-bottom:18px; border-radius:var(--r-sm); display:block; break-inside:avoid; cursor:zoom-in;
+  transition:filter .3s var(--ease), transform .3s var(--ease); }
+.gmasonry img:hover{ filter:brightness(1.06); }
+
+/* CTA / location */
+.locate{ background:var(--ink); color:var(--on-dark); }
+.locate__grid{ display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+.locate h2{ color:#fff; font-size:clamp(2.4rem,4vw,3.6rem); font-weight:500; }
+.locate .script{ color:var(--gold); font-size:2.2rem; display:block; margin-bottom:8px; }
+.locate p{ color:var(--on-dark-mute); margin:22px 0 30px; max-width:30em; }
+.locate__info{ display:flex; flex-direction:column; gap:18px; margin-top:30px; }
+.locate__info .row{ display:flex; gap:16px; align-items:baseline; border-top:1px solid rgba(255,255,255,.16); padding-top:16px; }
+.locate__info .row .k{ font-size:.68rem; letter-spacing:.2em; text-transform:uppercase; color:var(--spa-lt); min-width:90px; }
+.locate__info .row .v{ color:#fff; }
+.locate__map{ border-radius:var(--r-md); overflow:hidden; box-shadow:var(--shadow-lg); border:6px solid rgba(255,255,255,.06); }
+.locate__map iframe{ width:100%; height:440px; border:0; display:block; filter:grayscale(.2) contrast(1.02); }
+
+/* Footer */
+footer{ background:#0f2630; color:var(--on-dark-mute); padding:70px 0 40px; }
+.foot{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:48px; }
+.foot__brand img{ height:44px; margin-bottom:18px; }
+.foot__brand p{ font-size:.92rem; max-width:26em; }
+.foot h4{ color:#fff; font-family:var(--body); font-size:.72rem; letter-spacing:.22em; text-transform:uppercase; margin:0 0 18px; }
+.foot ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px; }
+.foot a:hover{ color:var(--gold); }
+.foot__bottom{ margin-top:54px; padding-top:24px; border-top:1px solid rgba(255,255,255,.12);
+  display:flex; justify-content:space-between; font-size:.78rem; color:rgba(255,255,255,.5); flex-wrap:wrap; gap:12px; }
+
+/* Lightbox */
+.lb{ position:fixed; inset:0; z-index:200; background:rgba(8,20,26,.94); display:none;
+  align-items:center; justify-content:center; padding:40px; cursor:zoom-out; }
+.lb.open{ display:flex; }
+.lb img{ max-width:92vw; max-height:90vh; border-radius:var(--r-sm); box-shadow:var(--shadow-lg); }
+
+@media(max-width:980px){
+  .welcome,.locate__grid{ grid-template-columns:1fr; gap:44px; }
+  .exp__grid{ grid-template-columns:1fr; }
+  .stats{ grid-template-columns:repeat(2,1fr); }
+  .stat:nth-child(2){ border-right:0; }
+  .gmasonry{ columns:2; }
+  .nav__links{ display:none; }
+  .nav__left{ gap:0; }
+}
+@media(max-width:560px){ .gmasonry{ columns:1; } .stats{ grid-template-columns:1fr; } .stat{ border-right:0; } .wrap{ padding:0 22px; } }
+
+/* Mobile burger & drawer */
+.nav__burger{ display:none; background:none; border:none; cursor:pointer; padding:6px; flex-direction:column; gap:5px; align-items:center; justify-content:center; }
+.nav__burger span{ display:block; width:22px; height:2px; background:#fff; border-radius:2px; transition:transform .3s var(--ease), opacity .2s, background .4s var(--ease); }
+.nav--scrolled .nav__burger span{ background:var(--ink); }
+.nav__burger[aria-expanded="true"] span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+.nav__burger[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+.nav__burger[aria-expanded="true"] span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+.nav__mobile{ position:fixed; inset:0 0 auto 0; z-index:49; background:var(--canvas); padding:86px 44px 36px; display:flex; flex-direction:column; opacity:0; pointer-events:none; transform:translateY(-12px); transition:opacity .32s var(--ease), transform .32s var(--ease); box-shadow:var(--shadow-md); }
+.nav__mobile.open{ opacity:1; transform:none; pointer-events:auto; }
+.nav__mobile a{ font-family:var(--body); font-weight:600; font-size:.8rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ink); padding:16px 0; border-bottom:1px solid var(--line); display:block; }
+.nav__mobile > a:last-of-type{ border-bottom:none; }
+.nav__mobile__close{ position:absolute; top:20px; right:22px; background:none; border:1px solid var(--line); border-radius:var(--r-pill); width:36px; height:36px; display:grid; place-items:center; cursor:pointer; color:var(--ink); font-size:.95rem; transition:background .2s, color .2s; }
+.nav__mobile__close:hover{ background:var(--ink); color:#fff; border-color:var(--ink); }
+.nav--scrolled .btn--sms{ color:var(--gold-dk); border-color:var(--gold-dk); }
+.nav--scrolled .btn--sms:hover{ background:var(--gold-dk); color:#fff; }
+.nav__mobile__sms{ margin-top:18px; padding-top:22px; border-top:1px solid var(--line); }
+.nav__mobile .nav__mobile__sms a{ border-bottom:none; padding:0; color:var(--gold-dk); font-size:.76rem; letter-spacing:.14em; }
+.nav__mobile .nav__mobile__sms a:hover{ color:var(--burnt); }
+@media(max-width:980px){ .nav__burger{ display:flex; } .nav__sms-desktop{ display:none; } }
+</style>
+</head>
+<body data-screen-label="Direction A — Riverfront">
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav__left">
+    <button class="nav__burger" id="navBurger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <a class="nav__logo" href="#top"><img src="https://static.wixstatic.com/media/81984b_c04ca0d64a994e589d77ba62fd34f789~mv2.png/v1/fill/w_420,h_168,al_c,q_90,enc_auto/file.png" alt="The Lindsay Lodge"></a>
+    <div class="nav__links">
+      <a class="navlink" href="#lodge">The Lodge</a>
+      <a class="navlink" href="restaurant.html">Restaurant</a>
+      <a class="navlink" href="weddings.html">Weddings</a>
+      <a class="navlink" href="#gallery">Gallery</a>
+      <a class="navlink" href="#visit">Contact</a>
+    </div>
+  </div>
+  <div style="display:flex;gap:10px;align-items:center;">
+    <a class="btn btn--ghost-light nav__sms-desktop" href="https://mailchi.mp/thelindsaylodge/sms-signup" target="_blank" rel="noopener">SMS Updates</a>
+    <a class="btn btn--ghost-light" href="https://resnexus.com/resnexus/reservations/book/3CEECE79-8033-436E-B583-3819718437B6" target="_blank" rel="noopener">Book Now</a>
+  </div>
+</nav>
+<div class="nav__mobile" id="navMobile">
+  <button class="nav__mobile__close" id="navMobileClose" aria-label="Close menu">✕</button>
+  <a href="#lodge">The Lodge</a>
+  <a href="restaurant.html">Restaurant</a>
+  <a href="weddings.html">Weddings</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#visit">Contact</a>
+  <div class="nav__mobile__sms">
+    <a href="https://mailchi.mp/thelindsaylodge/sms-signup" target="_blank" rel="noopener">Sign up for text updates</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <img class="bg" src="https://static.wixstatic.com/media/81984b_78df8e2ce96f4a1ca870323763949629~mv2.jpeg/v1/fill/w_2000,h_1300,al_c,q_90,enc_auto/file.jpeg" alt="Aerial of The Lindsay Lodge along the Applegate River in autumn">
+  <div class="hero__in">
+    <span class="eyebrow">Applegate Valley · Southern Oregon</span>
+    <h1>Gather. Eat.<br><em>Celebrate.</em></h1>
+    <p class="hero__sub">A destination rustic-luxury lodge on the Applegate River — eighteen wineries within eighteen minutes, and one unforgettable place to stay.</p>
+    <div class="hero__cta">
+      <a class="btn btn--solid" href="https://resnexus.com/resnexus/reservations/book/3CEECE79-8033-436E-B583-3819718437B6" target="_blank" rel="noopener">Reserve Your Stay</a>
+      <a class="btn btn--ghost-light" href="#lodge">Explore the Lodge</a>
+    </div>
+  </div>
+  <div class="scrollcue">Scroll<span></span></div>
+</header>
+
+<!-- WELCOME -->
+<section class="pad" id="lodge">
+  <div class="wrap welcome">
+    <div class="welcome__copy">
+      <span class="eyebrow eyebrow--burnt">Welcome to The Lindsay</span>
+      <span class="script">a river runs through it</span>
+      <h2 class="lead">A handcrafted log lodge on the banks of the Applegate River.</h2>
+      <p>Set on a three-acre riverfront estate between Grants Pass and Medford near historic Jacksonville, The Lindsay is family-owned and built for forever memories. Every room opens onto a balcony with views of the Applegate River and the historic bridge.</p>
+      <p>Whether it's a reunion, wedding, retreat, or a romantic getaway in wine country — we specialize in the remarkable.</p>
+    </div>
+    <div class="welcome__media">
+      <img src="https://static.wixstatic.com/media/81984b_e0f0454c3f3c47bebc3eb9627e3db550~mv2.jpeg/v1/fill/w_1100,h_1120,al_c,q_90,enc_auto/file.jpeg" alt="The redwood lodge exterior with river-view balconies">
+      <div class="tag"><b>3 acres</b><small>Riverfront estate</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCES -->
+<section class="pad exp" id="dine">
+  <div class="wrap">
+    <div class="exp__head">
+      <span class="eyebrow eyebrow--burnt">A full-service destination</span>
+      <h2>Three ways to experience The Lindsay</h2>
+    </div>
+    <div class="exp__grid">
+      <article class="card">
+        <img src="https://static.wixstatic.com/media/81984b_22f60eb33f1d4d08a54c158a44892286~mv2.jpeg/v1/fill/w_900,h_640,al_c,q_90,enc_auto/file.jpeg" alt="Covered deck with rocking chairs overlooking the forest">
+        <div class="card__body">
+          <h3>Stay</h3>
+          <p>River-view rooms with balconies, a great room to cozy up by the fire, and the ultimate river-lodge experience.</p>
+          <a class="card__link" href="https://resnexus.com/resnexus/reservations/book/3CEECE79-8033-436E-B583-3819718437B6" target="_blank" rel="noopener">Our Rooms →</a>
+        </div>
+      </article>
+      <article class="card">
+        <img src="https://static.wixstatic.com/media/81984b_8ba66c672a094509b82c125b601f7465~mv2.jpg/v1/fill/w_900,h_640,al_c,q_90,enc_auto/file.jpg" alt="A plated dish from The Lindsay's kitchen">
+        <div class="card__body">
+          <h3>Dine</h3>
+          <p>A locally-inspired menu and a craft cocktail &amp; wine bar on site, served with views of the Applegate River.</p>
+          <a class="card__link" href="restaurant.html">The Restaurant →</a>
+        </div>
+      </article>
+      <article class="card">
+        <img src="https://static.wixstatic.com/media/81984b_ff7539d476ff481b884ab9fe0c6b87a4~mv2.jpeg/v1/fill/w_900,h_640,al_c,q_90,enc_auto/file.jpeg" alt="A rose-covered ceremony arbor in the courtyard">
+        <div class="card__body">
+          <h3>Celebrate</h3>
+          <p>Weddings, reunions and gatherings for up to 125 — in the lodge, the courtyard, or out in the open air.</p>
+          <a class="card__link" href="weddings.html">Weddings &amp; Events →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE BAND -->
+<section class="quote" id="celebrate">
+  <img class="bg" src="https://static.wixstatic.com/media/81984b_113803cd90f74ca48119af8395006ec9~mv2.jpeg/v1/fill/w_2000,h_1100,al_c,q_90,enc_auto/file.jpeg" alt="The lodge beside the Applegate River">
+  <div class="quote__in">
+    <span class="script">unforgettable</span>
+    <p>"The best experiences are those in beautiful destinations, with friends and family, thoughtfully sourced food and drinks."</p>
+    <span class="cite">— The Lindsay</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<section>
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><b>18</b><small>Wineries within 18 min</small></div>
+      <div class="stat"><b>125</b><small>Guests for events</small></div>
+      <div class="stat"><b>3</b><small>Acre riverfront estate</small></div>
+      <div class="stat"><b>1</b><small>Full-service lodge in the valley</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="pad" id="gallery">
+  <div class="wrap">
+    <div class="gallery__head">
+      <div>
+        <span class="eyebrow eyebrow--burnt">The Lindsay in pictures</span>
+        <h2>Beautiful from every angle</h2>
+      </div>
+      <a class="btn btn--ghost" href="#">View Full Gallery</a>
+    </div>
+    <div class="gmasonry" id="gmasonry">
+      <img src="https://static.wixstatic.com/media/81984b_2995b2b04b2b4f168e43657d0905bac6~mv2.jpeg/v1/fill/w_800,h_1060,al_c,q_90,enc_auto/file.jpeg" alt="Lodge among the trees">
+      <img src="https://static.wixstatic.com/media/81984b_a6b88bb6af1b4dbc8dd4321b2013a527~mv2.jpeg/v1/fill/w_900,h_640,al_c,q_90,enc_auto/file.jpeg" alt="Lodge exterior with lawn">
+      <img src="https://static.wixstatic.com/media/81984b_79e0b3b03fa14bf68189364c2d456e47~mv2.jpeg/v1/fill/w_800,h_1080,al_c,q_90,enc_auto/file.jpeg" alt="Great room loft with string lights">
+      <img src="https://static.wixstatic.com/media/81984b_94eaa2080f004097ba31263f3a4099b2~mv2.jpg/v1/fill/w_800,h_1040,al_c,q_90,enc_auto/file.jpg" alt="River view with Pioneer Bridge">
+      <img src="https://static.wixstatic.com/media/81984b_9e159ea9d70242e99643ba119f3e299b~mv2.jpg/v1/fill/w_900,h_640,al_c,q_90,enc_auto/file.jpg" alt="Wedding bouquet of roses">
+      <img src="https://static.wixstatic.com/media/81984b_a0bb6279567e485cbc860da800a2f569~mv2.jpeg/v1/fill/w_800,h_1060,al_c,q_90,enc_auto/file.jpeg" alt="Cozy interior corner with wood stove">
+      <img src="https://static.wixstatic.com/media/81984b_3a0810bbb7a74aa8b31be51e99a9a39c~mv2.jpeg/v1/fill/w_800,h_1100,al_c,q_90,enc_auto/file.jpeg" alt="Courtyard garden arbor">
+      <img src="https://static.wixstatic.com/media/81984b_7a90ce667faf435a880cdd54d060d099~mv2.jpeg/v1/fill/w_800,h_1100,al_c,q_90,enc_auto/file.jpeg" alt="Interior wooden staircase">
+      <img src="https://static.wixstatic.com/media/81984b_78df8e2ce96f4a1ca870323763949629~mv2.jpeg/v1/fill/w_900,h_620,al_c,q_90,enc_auto/file.jpeg" alt="Aerial of the lodge along the river">
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION / CTA -->
+<section class="pad locate" id="visit">
+  <div class="wrap locate__grid">
+    <div>
+      <span class="script">come find us</span>
+      <h2>In the heart of the<br>Applegate Valley</h2>
+      <p>Between Grants Pass and Medford, near historic Jacksonville — surrounded by Southern Oregon's finest vineyards, organic farms and ranches.</p>
+      <div class="locate__info">
+        <div class="row"><span class="k">Address</span><span class="v">15100 HWY 238, Jacksonville, OR 97530</span></div>
+        <div class="row"><span class="k">Phone</span><span class="v"><a href="tel:+15418466690">541-846-6690</a></span></div>
+        <div class="row"><span class="k">Email</span><span class="v"><a href="mailto:info@thelindsaylodge.com">info@thelindsaylodge.com</a></span></div>
+      </div>
+      <div style="margin-top:34px;"><a class="btn btn--solid" href="https://resnexus.com/resnexus/reservations/book/3CEECE79-8033-436E-B583-3819718437B6" target="_blank" rel="noopener">Book Your Stay</a></div>
+    </div>
+    <div class="locate__map">
+      <iframe loading="lazy" title="Map to The Lindsay Lodge" src="https://www.google.com/maps?q=15100+OR-238+Applegate+OR+97530&output=embed"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="foot__brand">
+        <img src="https://static.wixstatic.com/media/81984b_c04ca0d64a994e589d77ba62fd34f789~mv2.png/v1/fill/w_420,h_168,al_c,q_90,enc_auto/file.png" alt="The Lindsay Lodge">
+        <p>A destination rustic-luxury lodge in the Applegate Valley — the only full-service accommodation in Southern Oregon's wine country.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#lodge">The Lodge</a></li>
+          <li><a href="restaurant.html">Restaurant</a></li>
+          <li><a href="weddings.html">Weddings &amp; Events</a></li>
+          <li><a href="https://wanderapplegate.com/" target="_blank" rel="noopener">Applegate Valley</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li>15100 HWY 238<br>Jacksonville, OR 97530</li>
+          <li><a href="tel:+15418466690">541-846-6690</a></li>
+          <li><a href="mailto:info@thelindsaylodge.com">info@thelindsaylodge.com</a></li>
+          <li><a href="https://www.instagram.com/thelindsaylodge/" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__bottom">
+      <span>© 2026 The Lindsay Lodge &amp; Restaurant</span>
+      <span>Gather · Eat · Celebrate</span>
+    </div>
+  </div>
+</footer>
+
+<div class="lb" id="lb"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt=""></div>
+
+<script>
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('nav--scrolled', window.scrollY > 60);
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+  // Mobile nav
+  const burger = document.getElementById('navBurger');
+  const navMobile = document.getElementById('navMobile');
+  function closeNav() {
+    navMobile.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  burger.addEventListener('click', () => {
+    const open = !navMobile.classList.contains('open');
+    navMobile.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  document.getElementById('navMobileClose').addEventListener('click', closeNav);
+  navMobile.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+  // lightbox
+  const lb = document.getElementById('lb'), lbImg = lb.querySelector('img');
+  document.getElementById('gmasonry').addEventListener('click', e=>{
+    if(e.target.tagName==='IMG'){ lbImg.src = e.target.src; lb.classList.add('open'); }
+  });
+  lb.addEventListener('click', ()=> lb.classList.remove('open'));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') lb.classList.remove('open'); });
+</script>
+</body>
+</html>
