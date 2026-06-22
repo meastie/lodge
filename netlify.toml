@@ -1,2 +1,38 @@
 [build]
   publish = "."
+
+# 301 redirects from old Wix site URLs
+[[redirects]]
+  from = "/weddings-and-events"
+  to = "/weddings"
+  status = 301
+
+[[redirects]]
+  from = "/menus"
+  to = "/restaurant"
+  status = 301
+
+[[redirects]]
+  from = "/menus/*"
+  to = "/restaurant"
+  status = 301
+
+[[redirects]]
+  from = "/about-the-lodge"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/meet-the-owners"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/contact"
+  to = "/#visit"
+  status = 301
+
+[[redirects]]
+  from = "/review-links"
+  to = "/"
+  status = 301
