@@ -4,6 +4,12 @@
 [build.processing.html]
   pretty_urls = true
 
+# /lodge → homepage lodge section
+[[redirects]]
+  from = "/lodge"
+  to = "/#lodge"
+  status = 301
+
 # 301 redirects from old Wix site URLs
 [[redirects]]
   from = "/weddings-and-events"
