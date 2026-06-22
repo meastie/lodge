@@ -1,6 +1,9 @@
 [build]
   publish = "."
 
+[build.processing.html]
+  pretty_urls = true
+
 # 301 redirects from old Wix site URLs
 [[redirects]]
   from = "/weddings-and-events"
