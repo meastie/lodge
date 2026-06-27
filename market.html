@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Applegate Evening Market | The Lindsay Lodge — Wednesdays in the Applegate Valley</title>
+<meta name="description" content="The Applegate Evening Market is a weekly outdoor market held every Wednesday evening, May through September, at The Lindsay Lodge. Live music, local vendors, food, and drinks in the Applegate Valley, Oregon.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.thelindsaylodge.com/market">
+
+<meta property="og:type" content="event">
+<meta property="og:url" content="https://www.thelindsaylodge.com/market">
+<meta property="og:title" content="Applegate Evening Market — Every Wednesday at The Lindsay Lodge">
+<meta property="og:description" content="Live music, local vendors, food and drinks every Wednesday evening, May–September, on the grounds of The Lindsay Lodge in the Applegate Valley.">
+<meta property="og:image" content="https://www.thelindsaylodge.com/assets/market-lawn.jpg">
+<meta property="og:site_name" content="The Lindsay Lodge">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Applegate Evening Market | The Lindsay Lodge">
+<meta name="twitter:description" content="Live music, local vendors, and drinks every Wednesday evening at The Lindsay Lodge, Applegate Valley, Oregon.">
+<meta name="twitter:image" content="https://www.thelindsaylodge.com/assets/market-lawn.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EventSeries",
+  "name": "Applegate Evening Market",
+  "url": "https://www.thelindsaylodge.com/market",
+  "image": "https://www.thelindsaylodge.com/assets/market-lawn.jpg",
+  "description": "A weekly outdoor market featuring live music, local vendors, and food and drinks every Wednesday evening from May through September at The Lindsay Lodge.",
+  "eventSchedule": {
+    "@type": "Schedule",
+    "repeatFrequency": "P1W",
+    "byDay": "Wednesday",
+    "startTime": "17:15",
+    "endTime": "19:15",
+    "startDate": "2026-05-01",
+    "endDate": "2026-09-30"
+  },
+  "location": {
+    "@type": "Place",
+    "name": "The Lindsay Lodge",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "15100 HWY 238",
+      "addressLocality": "Jacksonville",
+      "addressRegion": "OR",
+      "postalCode": "97530",
+      "addressCountry": "US"
+    }
+  },
+  "organizer": {
+    "@type": "Organization",
+    "name": "A Greater Applegate",
+    "url": "https://agreaterapplegate.org"
+  }
+}
+</script>
+
+<link rel="stylesheet" href="styles/brand.css">
+<style>
+.wrap{ max-width:1240px; margin:0 auto; padding:0 40px; }
+
+/* Nav */
+.nav{ position:fixed; inset:0 0 auto 0; z-index:50; display:flex; align-items:center;
+  justify-content:space-between; padding:22px 44px; transition:all .4s var(--ease); }
+.nav__links{ display:flex; gap:34px; align-items:center; }
+.nav a.navlink{ font-family:var(--body); font-weight:600; font-size:.74rem; letter-spacing:.18em;
+  text-transform:uppercase; color:#fff; opacity:.92; transition:opacity .2s; }
+.nav a.navlink:hover,.nav a.navlink.active{ opacity:1; }
+.nav__logo img{ height:42px; display:block; transition:filter .4s var(--ease); }
+.nav .btn{ padding:.85em 1.5em; }
+.nav--scrolled{ background:var(--canvas); padding:14px 44px; box-shadow:var(--shadow-sm); }
+.nav--scrolled a.navlink{ color:var(--ink); }
+.nav--scrolled .nav__logo img{ filter:brightness(0) saturate(100%) invert(15%) sepia(34%) saturate(900%) hue-rotate(155deg) brightness(94%) contrast(92%); }
+.nav--scrolled .btn--ghost-light{ border-color:var(--ink); color:var(--ink); }
+.nav--scrolled .btn--ghost-light:hover{ background:var(--ink); color:#fff; }
+.nav__left{ display:flex; align-items:center; gap:42px; }
+
+/* Mobile nav */
+.nav__burger{ display:none; background:none; border:none; cursor:pointer; padding:6px; flex-direction:column; gap:5px; align-items:center; justify-content:center; }
+.nav__burger span{ display:block; width:22px; height:2px; background:#fff; border-radius:2px; transition:transform .3s var(--ease), opacity .2s, background .4s var(--ease); }
+.nav--scrolled .nav__burger span{ background:var(--ink); }
+.nav__burger[aria-expanded="true"] span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+.nav__burger[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+.nav__burger[aria-expanded="true"] span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+.nav__mobile{ position:fixed; inset:0; z-index:49; background:var(--ink); display:flex; flex-direction:column;
+  padding:90px 44px 50px; gap:0; transform:translateY(-100%); opacity:0;
+  transition:transform .45s var(--ease), opacity .35s var(--ease); pointer-events:none; }
+.nav__mobile.open{ transform:translateY(0); opacity:1; pointer-events:auto; }
+.nav__mobile a{ font-family:var(--display); font-size:2rem; color:var(--on-dark); padding:14px 0;
+  border-bottom:1px solid rgba(255,255,255,.1); font-weight:500; }
+.nav__mobile > a:last-of-type{ border-bottom:none; }
+.nav__mobile__close{ position:absolute; top:22px; right:44px; background:none; border:none;
+  color:#fff; font-size:1.5rem; cursor:pointer; padding:8px; }
+.nav__mobile__sms{ margin-top:18px; padding-top:22px; border-top:1px solid rgba(255,255,255,.1); }
+.nav__mobile .nav__mobile__sms a{ border-bottom:none; padding:0; color:var(--gold); font-size:.76rem; letter-spacing:.14em; font-family:var(--body); }
+@media(max-width:980px){ .nav__burger{ display:flex; } .nav__sms-desktop{ display:none; } }
+
+/* Book dropdown */
+.book-dropdown{ position:relative; }
+.book-dropdown > button{ background:transparent; }
+.book-dropdown__menu{ display:none; position:absolute; top:calc(100% + 10px); right:0;
+  background:#fff; border-radius:var(--r-md); box-shadow:var(--shadow-md);
+  min-width:190px; overflow:hidden; z-index:200; }
+.book-dropdown__menu.open{ display:block; }
+.book-dropdown__menu a{ display:block; padding:15px 20px; font-family:var(--body);
+  font-weight:600; font-size:.78rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--ink); border-bottom:1px solid var(--line); transition:background .18s; }
+.book-dropdown__menu a:last-child{ border-bottom:none; }
+.book-dropdown__menu a:hover{ background:var(--canvas-2); }
+
+/* Hero */
+.hero{ position:relative; height:100vh; min-height:640px; display:flex; align-items:center;
+  justify-content:center; text-align:center; color:#fff; overflow:hidden; }
+.hero__bg{ position:absolute; inset:0; background-size:cover; background-position:center 30%;
+  background-image:url('assets/market-lawn.jpg'); }
+.hero__bg::after{ content:''; position:absolute; inset:0;
+  background:linear-gradient(to bottom, rgba(10,30,40,.45) 0%, rgba(10,30,40,.55) 100%); }
+.hero__body{ position:relative; z-index:2; padding:0 20px; }
+.hero__eyebrow{ font-family:var(--body); font-weight:600; font-size:.72rem;
+  letter-spacing:.34em; text-transform:uppercase; opacity:.8; margin-bottom:18px; }
+.hero h1{ font-family:var(--script); font-size:clamp(3rem,8vw,7rem); font-weight:400;
+  color:#fff; line-height:1; margin-bottom:24px; }
+.hero__sub{ font-family:var(--body); font-size:clamp(.9rem,1.4vw,1.1rem);
+  opacity:.85; max-width:38em; margin:0 auto 36px; letter-spacing:.04em; }
+.hero__ctas{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+
+/* Sections */
+.pad{ padding:90px 0; }
+.pad--sm{ padding:60px 0; }
+
+/* Intro */
+.intro{ background:var(--canvas); }
+.intro__grid{ display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+.intro__text .eyebrow{ color:var(--burnt); margin-bottom:14px; display:block; }
+.intro__text h2{ font-size:clamp(2rem,3.5vw,3.2rem); font-weight:500; margin-bottom:22px; }
+.intro__text p{ color:var(--fg-soft); line-height:1.75; margin-bottom:16px; }
+.intro__text .rule{ margin:28px 0; }
+.intro__img{ border-radius:var(--r-lg); overflow:hidden; }
+.intro__img img{ width:100%; height:480px; object-fit:cover; display:block; }
+
+/* Photo strip */
+.strip{ background:var(--canvas-2); }
+.strip__grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.strip__grid img{ width:100%; height:340px; object-fit:cover; border-radius:var(--r-md); display:block; }
+
+/* Lineup */
+.lineup{ background:var(--ink); color:var(--on-dark); }
+.lineup .eyebrow{ color:var(--gold); }
+.lineup__head{ text-align:center; margin-bottom:60px; }
+.lineup__head h2{ color:#fff; font-size:clamp(2rem,3.5vw,3rem); font-weight:500; margin:14px 0 18px; }
+.lineup__head p{ color:var(--on-dark-mute); max-width:36em; margin:0 auto; }
+.lineup__grid{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; }
+.lineup__img{ border-radius:var(--r-lg); overflow:hidden; }
+.lineup__img img{ width:100%; display:block; }
+.lineup__months{ display:flex; flex-direction:column; gap:32px; }
+.lineup__month h3{ font-family:var(--body); font-weight:700; font-size:.72rem;
+  letter-spacing:.28em; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
+.lineup__month ul{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px; }
+.lineup__month li{ color:var(--on-dark); font-family:var(--display); font-size:1.1rem;
+  font-weight:400; padding-bottom:8px; border-bottom:1px solid rgba(255,255,255,.08); }
+.lineup__month li:last-child{ border-bottom:none; }
+
+/* Vendor grid */
+.vendors{ background:var(--canvas); }
+.vendors__grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.vendors__grid img{ width:100%; height:340px; object-fit:cover; border-radius:var(--r-md); display:block; }
+
+/* Visit info */
+.visit{ background:var(--canvas-2); }
+.visit__grid{ display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+.visit__text .eyebrow{ color:var(--burnt); margin-bottom:14px; display:block; }
+.visit__text h2{ font-size:clamp(2rem,3.5vw,3rem); font-weight:500; margin-bottom:24px; }
+.visit__details{ display:flex; flex-direction:column; gap:18px; margin-bottom:36px; }
+.visit__detail{ display:flex; gap:16px; align-items:flex-start; }
+.visit__detail__label{ font-family:var(--body); font-weight:700; font-size:.72rem;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--burnt); min-width:80px; padding-top:2px; }
+.visit__detail__val{ color:var(--fg-soft); line-height:1.6; }
+.visit__img{ border-radius:var(--r-lg); overflow:hidden; }
+.visit__img img{ width:100%; height:480px; object-fit:cover; display:block; }
+
+/* Footer */
+footer{ background:#0f2630; color:var(--on-dark-mute); padding:70px 0 40px; }
+.foot{ display:grid; grid-template-columns:2fr 1fr 1fr; gap:60px; padding-bottom:50px;
+  border-bottom:1px solid rgba(255,255,255,.08); }
+.foot__brand img{ height:48px; filter:brightness(0) invert(1); opacity:.8; margin-bottom:18px; }
+.foot__brand p{ font-size:.88rem; line-height:1.7; max-width:28em; }
+footer h4{ font-family:var(--body); font-weight:700; font-size:.72rem;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--gold); margin-bottom:16px; }
+footer ul{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px; font-size:.9rem; }
+footer a{ color:var(--on-dark-mute); transition:color .2s; }
+footer a:hover{ color:var(--on-dark); }
+.foot__bottom{ display:flex; justify-content:space-between; padding-top:28px; font-size:.82rem; flex-wrap:wrap; gap:10px; }
+
+@media(max-width:900px){
+  .intro__grid,.lineup__grid,.visit__grid{ grid-template-columns:1fr; gap:44px; }
+  .strip__grid,.vendors__grid{ grid-template-columns:1fr 1fr; }
+  .foot{ grid-template-columns:1fr; gap:36px; }
+}
+@media(max-width:600px){
+  .strip__grid,.vendors__grid{ grid-template-columns:1fr; }
+  .wrap{ padding:0 24px; }
+  .pad{ padding:60px 0; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav__left">
+    <button class="nav__burger" id="navBurger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <a class="nav__logo" href="index.html"><img src="https://static.wixstatic.com/media/81984b_c04ca0d64a994e589d77ba62fd34f789~mv2.png/v1/fill/w_420,h_168,al_c,q_90,enc_auto/file.png" alt="The Lindsay Lodge"></a>
+    <div class="nav__links">
+      <a class="navlink" href="index.html#lodge">The Lodge</a>
+      <a class="navlink" href="restaurant.html">Restaurant</a>
+      <a class="navlink" href="weddings.html">Weddings</a>
+      <a class="navlink active" href="market.html">Market</a>
+      <a class="navlink" href="index.html#visit">Contact</a>
+    </div>
+  </div>
+  <div style="display:flex;gap:10px;align-items:center;">
+    <a class="btn btn--ghost-light nav__sms-desktop" href="https://mailchi.mp/thelindsaylodge/sms-signup" target="_blank" rel="noopener">SMS Updates</a>
+    <div class="book-dropdown" id="bookDropdown">
+      <button class="btn btn--ghost-light" id="bookBtn" aria-haspopup="true" aria-expanded="false">Book Now</button>
+      <div class="book-dropdown__menu" id="bookMenu">
+        <a href="https://resnexus.com/resnexus/reservations/book/3CEECE79-8033-436E-B583-3819718437B6" target="_blank" rel="noopener">Book a Room</a>
+        <a href="restaurant.html#reserve">Book a Table</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="nav__mobile" id="navMobile">
+  <button class="nav__mobile__close" id="navMobileClose" aria-label="Close menu">✕</button>
+  <a href="index.html#lodge">The Lodge</a>
+  <a href="restaurant.html">Restaurant</a>
+  <a href="weddings.html">Weddings</a>
+  <a href="market.html">Market</a>
+  <a href="index.html#visit">Contact</a>
+  <div class="nav__mobile__sms">
+    <a href="https://mailchi.mp/thelindsaylodge/sms-signup" target="_blank" rel="noopener">Sign up for text updates</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__bg"></div>
+  <div class="hero__body">
+    <p class="hero__eyebrow">Every Wednesday · May through September · 5–8 PM</p>
+    <h1>Applegate Evening Market</h1>
+    <p class="hero__sub">Live music, local vendors, farm-fresh produce, and a full bar — right here on the grounds of The Lindsay Lodge.</p>
+    <div class="hero__ctas">
+      <a class="btn btn--solid" href="https://www.applegateeveningmarket.com" target="_blank" rel="noopener">Visit the Market Website</a>
+      <a class="btn btn--ghost-light" href="#lineup">2026 Music Lineup</a>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="pad intro">
+  <div class="wrap">
+    <div class="intro__grid">
+      <div class="intro__text">
+        <span class="eyebrow">About the Market</span>
+        <h2>Where the valley gathers.</h2>
+        <hr class="rule">
+        <p>Every Wednesday evening from May through September, the grounds of The Lindsay come alive with the Applegate Evening Market — an outdoor gathering celebrating the farms, makers, and musicians of the Applegate Valley.</p>
+        <p>Each week you'll find fresh produce from local farms, handcrafted goods, artisan products, and more — all while enjoying live music. The Lindsay Lodge bar is open throughout the evening, serving beer, wine and a bistro menu. You'll also find other food vendors from the area.</p>
+        <p>Bring your lawn chair, your neighbors, and your appetite.</p>
+        <div style="margin-top:32px; display:flex; gap:40px; flex-wrap:wrap;">
+          <div>
+            <div style="font-family:var(--display);font-size:2.4rem;font-weight:500;color:var(--ink);">5 PM</div>
+            <div style="font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-mute);font-weight:600;">Music Starts</div>
+          </div>
+          <div>
+            <div style="font-family:var(--display);font-size:2.4rem;font-weight:500;color:var(--ink);">Free</div>
+            <div style="font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-mute);font-weight:600;">Admission</div>
+          </div>
+          <div>
+            <div style="font-family:var(--display);font-size:2.4rem;font-weight:500;color:var(--ink);">30+</div>
+            <div style="font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-mute);font-weight:600;">Local Vendors</div>
+          </div>
+        </div>
+      </div>
+      <div class="intro__img">
+        <img src="assets/market-produce.jpg" alt="Fresh heirloom tomatoes and produce at the Applegate Evening Market">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO STRIP -->
+<section class="pad--sm strip">
+  <div class="wrap">
+    <div class="strip__grid">
+      <img src="assets/market-musicians.jpg" alt="Live banjo musicians performing at the Applegate Evening Market">
+      <img src="assets/market-lavender.jpg" alt="English Lavender Farm vendor booth">
+      <img src="assets/market-jams.jpg" alt="Homemade jam vendors at the market">
+    </div>
+  </div>
+</section>
+
+<!-- MUSIC LINEUP -->
+<section class="pad lineup" id="lineup">
+  <div class="wrap">
+    <div class="lineup__head">
+      <span class="eyebrow">The Music</span>
+      <h2>2026 Summer Lineup</h2>
+      <p>From bluegrass to folk, roots to Americana — every week brings something new to the stage.</p>
+    </div>
+    <div class="lineup__grid">
+      <div class="lineup__img">
+        <img src="assets/market-lineup.png" alt="2026 Applegate Evening Market music lineup">
+      </div>
+      <div class="lineup__months">
+        <div class="lineup__month">
+          <h3>May</h3>
+          <ul>
+            <li>Never Come Down</li>
+            <li>Mountaintop Sound</li>
+          </ul>
+        </div>
+        <div class="lineup__month">
+          <h3>June</h3>
+          <ul>
+            <li>dadwood</li>
+            <li>The Monroes</li>
+            <li>Crooked Carter Hogg</li>
+            <li>Object Heavy</li>
+          </ul>
+        </div>
+        <div class="lineup__month">
+          <h3>July</h3>
+          <ul>
+            <li>Quartz Creek</li>
+            <li>The Egyptians</li>
+            <li>Tuesday String Band</li>
+            <li>Dirty Grass Players</li>
+            <li>Broken Compass Bluegrass</li>
+          </ul>
+        </div>
+        <div class="lineup__month">
+          <h3>August</h3>
+          <ul>
+            <li>Maxwell Friedman Group</li>
+            <li>Electric Eel</li>
+            <li>The Heeters</li>
+          </ul>
+        </div>
+        <div class="lineup__month">
+          <h3>September</h3>
+          <ul>
+            <li>Ashleigh Flynn &amp; The Riveters</li>
+            <li>Desert Hollow</li>
+            <li>The Gold Souls</li>
+            <li>Artist Announcing Soon</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VENDOR PHOTOS -->
+<section class="pad--sm vendors">
+  <div class="wrap">
+    <div class="vendors__grid">
+      <img src="assets/market-booths.jpg" alt="Vendor booths and crowds at the Applegate Evening Market">
+      <img src="assets/market-vegetables.jpg" alt="Fresh vegetables at the market">
+      <img src="assets/market-sign.jpg" alt="Slagle Creek Farm chalkboard sign at the market">
+    </div>
+  </div>
+</section>
+
+<!-- VISIT INFO -->
+<section class="pad visit">
+  <div class="wrap">
+    <div class="visit__grid">
+      <div class="visit__text">
+        <span class="eyebrow">Plan Your Visit</span>
+        <h2>Join us this Wednesday.</h2>
+        <div class="visit__details">
+          <div class="visit__detail">
+            <span class="visit__detail__label">When</span>
+            <span class="visit__detail__val">Every Wednesday, May–September<br>5:00 – 8:00 PM</span>
+          </div>
+          <div class="visit__detail">
+            <span class="visit__detail__label">Where</span>
+            <span class="visit__detail__val">The Lindsay Lodge<br>15100 HWY 238, Jacksonville, OR 97530</span>
+          </div>
+          <div class="visit__detail">
+            <span class="visit__detail__label">Cost</span>
+            <span class="visit__detail__val">Free admission · Bar open for drinks</span>
+          </div>
+          <div class="visit__detail">
+            <span class="visit__detail__label">Parking</span>
+            <span class="visit__detail__val">Free on-site parking available</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;">
+          <a class="btn btn--solid" href="https://www.applegateeveningmarket.com" target="_blank" rel="noopener">Market Website</a>
+          <a class="btn btn--ghost" href="https://www.facebook.com/applegateeveningmarket/" target="_blank" rel="noopener">Facebook Page</a>
+        </div>
+      </div>
+      <div class="visit__img">
+        <img src="assets/market-lawn.jpg" alt="Crowd enjoying the Applegate Evening Market on the lodge lawn">
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="foot__brand">
+        <img src="https://static.wixstatic.com/media/81984b_c04ca0d64a994e589d77ba62fd34f789~mv2.png/v1/fill/w_420,h_168,al_c,q_90,enc_auto/file.png" alt="The Lindsay Lodge">
+        <p>A destination rustic-luxury lodge in the Applegate Valley — the only full-service accommodation in Southern Oregon's wine country.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html#lodge">The Lodge</a></li>
+          <li><a href="restaurant.html">Restaurant</a></li>
+          <li><a href="weddings.html">Weddings &amp; Events</a></li>
+          <li><a href="market.html">Evening Market</a></li>
+          <li><a href="https://wanderapplegate.com/" target="_blank" rel="noopener">Applegate Valley</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li>15100 HWY 238<br>Jacksonville, OR 97530</li>
+          <li><a href="tel:+15418466690">541-846-6690</a></li>
+          <li><a href="mailto:info@thelindsaylodge.com">info@thelindsaylodge.com</a></li>
+          <li><a href="https://www.instagram.com/thelindsaylodge/" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__bottom">
+      <span>© 2026 The Lindsay Lodge &amp; Restaurant</span>
+      <span><a href="https://www.applegateeveningmarket.com" target="_blank" rel="noopener">applegateeveningmarket.com</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('nav--scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // Mobile nav
+  const burger = document.getElementById('navBurger');
+  const navMobile = document.getElementById('navMobile');
+  function closeNav() {
+    navMobile.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  burger.addEventListener('click', () => {
+    const open = !navMobile.classList.contains('open');
+    navMobile.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  document.getElementById('navMobileClose').addEventListener('click', closeNav);
+  navMobile.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+
+  // Book dropdown
+  const bookBtn = document.getElementById('bookBtn');
+  const bookMenu = document.getElementById('bookMenu');
+  bookBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    const open = !bookMenu.classList.contains('open');
+    bookMenu.classList.toggle('open', open);
+    bookBtn.setAttribute('aria-expanded', open);
+  });
+  document.addEventListener('click', () => {
+    bookMenu.classList.remove('open');
+    bookBtn.setAttribute('aria-expanded', 'false');
+  });
+  document.addEventListener('keydown', e => { if(e.key==='Escape') bookMenu.classList.remove('open'); });
+</script>
+</body>
+</html>

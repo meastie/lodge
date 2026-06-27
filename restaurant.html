@@ -232,13 +232,20 @@ footer{ background:#0f2630; color:var(--on-dark-mute); padding:70px 0 40px; }
       <a class="navlink" href="index.html#lodge">The Lodge</a>
       <a class="navlink active" href="restaurant.html">Restaurant</a>
       <a class="navlink" href="weddings.html">Weddings</a>
+      <a class="navlink" href="market.html">Market</a>
       <a class="navlink" href="index.html#gallery">Gallery</a>
       <a class="navlink" href="index.html#visit">Contact</a>
     </div>
   </div>
   <div style="display:flex;gap:10px;align-items:center;">
     <a class="btn btn--ghost-light nav__sms-desktop" href="https://mailchi.mp/thelindsaylodge/sms-signup" target="_blank" rel="noopener">SMS Updates</a>
-    <a class="btn btn--ghost-light" href="https://resnexus.com/resnexus/reservations/book/3CEECE79-8033-436E-B583-3819718437B6" target="_blank" rel="noopener">Book Now</a>
+    <div class="book-dropdown" id="bookDropdown">
+      <button class="btn btn--ghost-light" id="bookBtn" aria-haspopup="true" aria-expanded="false">Book Now</button>
+      <div class="book-dropdown__menu" id="bookMenu">
+        <a href="https://resnexus.com/resnexus/reservations/book/3CEECE79-8033-436E-B583-3819718437B6" target="_blank" rel="noopener">Book a Room</a>
+        <a href="#reserve">Book a Table</a>
+      </div>
+    </div>
   </div>
 </nav>
 <div class="nav__mobile" id="navMobile">
@@ -246,6 +253,7 @@ footer{ background:#0f2630; color:var(--on-dark-mute); padding:70px 0 40px; }
   <a href="index.html#lodge">The Lodge</a>
   <a href="restaurant.html">Restaurant</a>
   <a href="weddings.html">Weddings</a>
+  <a href="market.html">Market</a>
   <a href="index.html#gallery">Gallery</a>
   <a href="index.html#visit">Contact</a>
   <div class="nav__mobile__sms">
@@ -370,10 +378,6 @@ footer{ background:#0f2630; color:var(--on-dark-mute); padding:70px 0 40px; }
           <div class="dish">
             <div class="dish__top"><span class="dish__name">Chicken Rosso</span><span class="dish__dots"></span><span class="dish__price">25</span></div>
             <p class="dish__desc">Panko chicken · tomato basil · mozzarella · smoked paprika oil · preserved lemon vinaigrette.</p>
-          </div>
-          <div class="dish">
-            <div class="dish__top"><span class="dish__name">Veggie Burger</span><span class="dish__dots"></span><span class="dish__price">19</span></div>
-            <p class="dish__desc">Gardenburger patty · provolone · shredded lettuce · garlic aioli · red onion · pepperoncini · fries.<span class="dish__tag">V</span></p>
           </div>
           <div class="dish">
             <div class="dish__top"><span class="dish__name">Tagliatelle</span><span class="dish__dots"></span><span class="dish__price">29</span></div>
@@ -598,6 +602,18 @@ footer{ background:#0f2630; color:var(--on-dark-mute); padding:70px 0 40px; }
 .mo__note{ font-size:.82rem; color:var(--fg-mute); font-style:italic; margin:24px 0 0; }
 .mo__foot{ display:flex; gap:12px; flex-wrap:wrap; margin-top:38px; padding-top:26px; border-top:1px solid var(--line); }
 @media(max-width:560px){ .mo__sheet{ padding:64px 26px 40px; } }
+/* Book dropdown */
+.book-dropdown{ position:relative; }
+.book-dropdown > button{ background:transparent; }
+.book-dropdown__menu{ display:none; position:absolute; top:calc(100% + 10px); right:0;
+  background:#fff; border-radius:var(--r-md); box-shadow:var(--shadow-md);
+  min-width:190px; overflow:hidden; z-index:200; }
+.book-dropdown__menu.open{ display:block; }
+.book-dropdown__menu a{ display:block; padding:15px 20px; font-family:var(--body);
+  font-weight:600; font-size:.78rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--ink); border-bottom:1px solid var(--line); transition:background .18s; }
+.book-dropdown__menu a:last-child{ border-bottom:none; }
+.book-dropdown__menu a:hover{ background:var(--canvas-2); }
 </style>
 
 <script>
@@ -620,6 +636,20 @@ footer{ background:#0f2630; color:var(--on-dark-mute); padding:70px 0 40px; }
   });
   document.getElementById('navMobileClose').addEventListener('click', closeNav);
   navMobile.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+  // Book dropdown
+  const bookBtn = document.getElementById('bookBtn');
+  const bookMenu = document.getElementById('bookMenu');
+  bookBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    const open = !bookMenu.classList.contains('open');
+    bookMenu.classList.toggle('open', open);
+    bookBtn.setAttribute('aria-expanded', open);
+  });
+  document.addEventListener('click', () => {
+    bookMenu.classList.remove('open');
+    bookBtn.setAttribute('aria-expanded', 'false');
+  });
+  document.addEventListener('keydown', e => { if(e.key==='Escape') bookMenu.classList.remove('open'); });
 
   // Menu overlay
   const mo = document.getElementById('menuOverlay');

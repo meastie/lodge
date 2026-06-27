@@ -240,6 +240,18 @@ footer{ background:#0f2630; color:var(--on-dark-mute); padding:70px 0 40px; }
 .nav__mobile .nav__mobile__sms a{ border-bottom:none; padding:0; color:var(--gold-dk); font-size:.76rem; letter-spacing:.14em; }
 .nav__mobile .nav__mobile__sms a:hover{ color:var(--burnt); }
 @media(max-width:980px){ .nav__burger{ display:flex; } .nav__sms-desktop{ display:none; } }
+/* Book dropdown */
+.book-dropdown{ position:relative; }
+.book-dropdown > button{ background:transparent; }
+.book-dropdown__menu{ display:none; position:absolute; top:calc(100% + 10px); right:0;
+  background:#fff; border-radius:var(--r-md); box-shadow:var(--shadow-md);
+  min-width:190px; overflow:hidden; z-index:200; }
+.book-dropdown__menu.open{ display:block; }
+.book-dropdown__menu a{ display:block; padding:15px 20px; font-family:var(--body);
+  font-weight:600; font-size:.78rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--ink); border-bottom:1px solid var(--line); transition:background .18s; }
+.book-dropdown__menu a:last-child{ border-bottom:none; }
+.book-dropdown__menu a:hover{ background:var(--canvas-2); }
 </style>
 </head>
 <body data-screen-label="Direction A — Riverfront">
@@ -253,13 +265,20 @@ footer{ background:#0f2630; color:var(--on-dark-mute); padding:70px 0 40px; }
       <a class="navlink" href="#lodge">The Lodge</a>
       <a class="navlink" href="restaurant.html">Restaurant</a>
       <a class="navlink" href="weddings.html">Weddings</a>
+      <a class="navlink" href="market.html">Market</a>
       <a class="navlink" href="#gallery">Gallery</a>
       <a class="navlink" href="#visit">Contact</a>
     </div>
   </div>
   <div style="display:flex;gap:10px;align-items:center;">
     <a class="btn btn--ghost-light nav__sms-desktop" href="https://mailchi.mp/thelindsaylodge/sms-signup" target="_blank" rel="noopener">SMS Updates</a>
-    <a class="btn btn--ghost-light" href="https://resnexus.com/resnexus/reservations/book/3CEECE79-8033-436E-B583-3819718437B6" target="_blank" rel="noopener">Book Now</a>
+    <div class="book-dropdown" id="bookDropdown">
+      <button class="btn btn--ghost-light" id="bookBtn" aria-haspopup="true" aria-expanded="false">Book Now</button>
+      <div class="book-dropdown__menu" id="bookMenu">
+        <a href="https://resnexus.com/resnexus/reservations/book/3CEECE79-8033-436E-B583-3819718437B6" target="_blank" rel="noopener">Book a Room</a>
+        <a href="restaurant.html#reserve">Book a Table</a>
+      </div>
+    </div>
   </div>
 </nav>
 <div class="nav__mobile" id="navMobile">
@@ -267,6 +286,7 @@ footer{ background:#0f2630; color:var(--on-dark-mute); padding:70px 0 40px; }
   <a href="#lodge">The Lodge</a>
   <a href="restaurant.html">Restaurant</a>
   <a href="weddings.html">Weddings</a>
+  <a href="market.html">Market</a>
   <a href="#gallery">Gallery</a>
   <a href="#visit">Contact</a>
   <div class="nav__mobile__sms">
@@ -378,11 +398,16 @@ footer{ background:#0f2630; color:var(--on-dark-mute); padding:70px 0 40px; }
       <img src="https://static.wixstatic.com/media/81984b_a6b88bb6af1b4dbc8dd4321b2013a527~mv2.jpeg/v1/fill/w_900,h_640,al_c,q_90,enc_auto/file.jpeg" alt="Lodge exterior with lawn">
       <img src="https://static.wixstatic.com/media/81984b_79e0b3b03fa14bf68189364c2d456e47~mv2.jpeg/v1/fill/w_800,h_1080,al_c,q_90,enc_auto/file.jpeg" alt="Great room loft with string lights">
       <img src="https://static.wixstatic.com/media/81984b_94eaa2080f004097ba31263f3a4099b2~mv2.jpg/v1/fill/w_800,h_1040,al_c,q_90,enc_auto/file.jpg" alt="River view with Pioneer Bridge">
-      <img src="https://static.wixstatic.com/media/81984b_9e159ea9d70242e99643ba119f3e299b~mv2.jpg/v1/fill/w_900,h_640,al_c,q_90,enc_auto/file.jpg" alt="Wedding bouquet of roses">
+
       <img src="https://static.wixstatic.com/media/81984b_a0bb6279567e485cbc860da800a2f569~mv2.jpeg/v1/fill/w_800,h_1060,al_c,q_90,enc_auto/file.jpeg" alt="Cozy interior corner with wood stove">
       <img src="https://static.wixstatic.com/media/81984b_3a0810bbb7a74aa8b31be51e99a9a39c~mv2.jpeg/v1/fill/w_800,h_1100,al_c,q_90,enc_auto/file.jpeg" alt="Courtyard garden arbor">
       <img src="https://static.wixstatic.com/media/81984b_7a90ce667faf435a880cdd54d060d099~mv2.jpeg/v1/fill/w_800,h_1100,al_c,q_90,enc_auto/file.jpeg" alt="Interior wooden staircase">
       <img src="https://static.wixstatic.com/media/81984b_78df8e2ce96f4a1ca870323763949629~mv2.jpeg/v1/fill/w_900,h_620,al_c,q_90,enc_auto/file.jpeg" alt="Aerial of the lodge along the river">
+      <img src="assets/lodge-deck.jpg" alt="Riverfront deck with Adirondack chairs and fire pit">
+      <img src="assets/lodge-room-interior.jpg" alt="Lodge room with wood ceiling, sitting area and balcony door">
+      <img src="assets/lodge-bathroom-modern.jpg" alt="Modern bathroom with walk-in shower and double mirrors">
+      <img src="assets/lodge-bathroom-classic.jpg" alt="Classic bathroom with soaking tub and wood cabinetry">
+      <img src="assets/lodge-room-vaulted.jpg" alt="Vaulted log ceiling lodge room with king bed and river views">
     </div>
   </div>
 </section>
@@ -463,6 +488,20 @@ footer{ background:#0f2630; color:var(--on-dark-mute); padding:70px 0 40px; }
   });
   document.getElementById('navMobileClose').addEventListener('click', closeNav);
   navMobile.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+  // Book dropdown
+  const bookBtn = document.getElementById('bookBtn');
+  const bookMenu = document.getElementById('bookMenu');
+  bookBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    const open = !bookMenu.classList.contains('open');
+    bookMenu.classList.toggle('open', open);
+    bookBtn.setAttribute('aria-expanded', open);
+  });
+  document.addEventListener('click', () => {
+    bookMenu.classList.remove('open');
+    bookBtn.setAttribute('aria-expanded', 'false');
+  });
+  document.addEventListener('keydown', e => { if(e.key==='Escape') bookMenu.classList.remove('open'); });
   // lightbox
   const lb = document.getElementById('lb'), lbImg = lb.querySelector('img');
   document.getElementById('gmasonry').addEventListener('click', e=>{
