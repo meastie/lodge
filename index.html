@@ -179,6 +179,10 @@ section{ position:relative; }
 .gmasonry img{ width:100%; margin-bottom:18px; border-radius:var(--r-sm); display:block; break-inside:avoid; cursor:zoom-in;
   transition:filter .3s var(--ease), transform .3s var(--ease); }
 .gmasonry img:hover{ filter:brightness(1.06); }
+.gitem{ position:relative; break-inside:avoid; margin-bottom:18px; }
+.gitem img{ margin-bottom:0; }
+.gitem__credit{ position:absolute; bottom:10px; right:10px; background:rgba(11,28,36,.6); color:#fff;
+  font-size:.62rem; letter-spacing:.05em; padding:5px 10px; border-radius:var(--r-sm); pointer-events:none; }
 
 /* CTA / location */
 .locate{ background:var(--ink); color:var(--on-dark); }
@@ -408,11 +412,10 @@ footer{ background:#0f2630; color:var(--on-dark-mute); padding:70px 0 40px; }
       <img src="assets/lodge-bathroom-modern.jpg" alt="Modern bathroom with walk-in shower and double mirrors">
       <img src="assets/lodge-bathroom-classic.jpg" alt="Classic bathroom with soaking tub and wood cabinetry">
       <img src="assets/lodge-room-vaulted.jpg" alt="Vaulted log ceiling lodge room with king bed and river views">
-      <img src="assets/wedding-tablescape-riverside.jpg" alt="Long riverside wedding reception table with floral centerpieces and gold candlesticks">
-      <img src="assets/wedding-ceremony-mums-aisle.jpg" alt="Wedding ceremony aisle lined with white chairs and mum arrangements">
-      <img src="assets/wedding-reception-tables-arch.jpg" alt="Wedding reception tables set beneath the trees near the ceremony arch">
+      <div class="gitem"><img src="assets/wedding-tablescape-riverside.jpg" alt="Long riverside wedding reception table with floral centerpieces and gold candlesticks"><span class="gitem__credit">Photo: Amanda Pays</span></div>
+      <div class="gitem"><img src="assets/wedding-ceremony-mums-aisle.jpg" alt="Wedding ceremony aisle lined with white chairs and mum arrangements"><span class="gitem__credit">Photo: Amanda Pays</span></div>
+      <div class="gitem"><img src="assets/wedding-reception-tables-arch.jpg" alt="Wedding reception tables set beneath the trees near the ceremony arch"><span class="gitem__credit">Photo: Amanda Pays</span></div>
     </div>
-    <p style="font-size:.78rem; color:var(--fg-mute); margin-top:18px;">Wedding photos by Amanda Pays.</p>
   </div>
 </section>
 
