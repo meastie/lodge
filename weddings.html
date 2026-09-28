@@ -143,6 +143,10 @@
 .masonry{ columns:3; column-gap:16px; }
 .masonry img{ width:100%; margin-bottom:16px; border-radius:var(--r-sm); display:block; break-inside:avoid; cursor:zoom-in; transition:filter .3s var(--ease); }
 .masonry img:hover{ filter:brightness(1.06); }
+.gitem{ position:relative; break-inside:avoid; margin-bottom:16px; }
+.gitem img{ margin-bottom:0; }
+.gitem__credit{ position:absolute; bottom:10px; right:10px; background:rgba(11,28,36,.6); color:#fff;
+  font-size:.62rem; letter-spacing:.05em; padding:5px 10px; border-radius:var(--r-sm); pointer-events:none; }
 
 /* INQUIRE split */
 .inquire{ background:var(--canvas-2); }
@@ -360,6 +364,9 @@ footer{ background:#0f2630; color:var(--on-dark-mute); padding:70px 0 40px; }
       <img src="assets/lodge-exterior-fall.jpg" alt="Lodge exterior with wooden pergola surrounded by golden fall foliage">
       <img src="assets/lodge-roses-pergola.jpg" alt="Rose-covered pergola in the lodge courtyard in summer">
       <img src="assets/lodge-room-vaulted.jpg" alt="Lodge room with vaulted log ceiling, king bed and river views">
+      <div class="gitem"><img src="assets/wedding-tablescape-riverside.jpg" alt="Long riverside wedding reception table with floral centerpieces and gold candlesticks"><span class="gitem__credit">Photo: Amanda Pays</span></div>
+      <div class="gitem"><img src="assets/wedding-ceremony-mums-aisle.jpg" alt="Wedding ceremony aisle lined with white chairs and mum arrangements"><span class="gitem__credit">Photo: Amanda Pays</span></div>
+      <div class="gitem"><img src="assets/wedding-reception-tables-arch.jpg" alt="Wedding reception tables set beneath the trees near the ceremony arch"><span class="gitem__credit">Photo: Amanda Pays</span></div>
     </div>
   </div>
 </section>
